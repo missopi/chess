@@ -11,6 +11,10 @@ attr_accessor :color, :piece
 
   def valid_moves(current_position)
   end
+
+  def can_leap?
+    return false
+  end
 end
 
 # subclass for pawn specific characteristics
@@ -18,7 +22,7 @@ class Pawn < Piece
   def valid_moves(current_position)
   end
 
-  # can move 2 spaces on first move
+  # can move 2 spaces to capture pawn after two step advance
   def en_passant(current_position)
   end
 
@@ -42,6 +46,10 @@ end
 # subclass for knight specific characteristics
 class Knight < Piece
   def valid_moves(current_position)
+  end
+
+  def can_leap?
+    return true
   end
 end
 
