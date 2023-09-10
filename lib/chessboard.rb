@@ -13,4 +13,10 @@ class chessboard
 
   def update_board
   end
+
+  def check
+  end
+
+  def checkmate
+  end
 end
