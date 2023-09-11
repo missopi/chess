@@ -14,9 +14,14 @@ class chessboard
   def update_board
   end
 
-  def check
+  def move(from, to) end
+
+  def check?
   end
 
-  def checkmate
+  def checkmate?
+  end
+
+  def stalemate?
   end
 end
