@@ -9,9 +9,6 @@ attr_accessor :color, :piece
     @piece = piece
   end
 
-  def valid_moves(current_position)
-  end
-
   def can_leap?
     return false
   end
