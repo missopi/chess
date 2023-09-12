@@ -11,9 +11,16 @@ class Game
 
   def instructions() end
 
-  def create_player(number) end
+  def create_player(number)
+    puts "\nPlayer #{number}, enter your name:"
+    name = gets.chomp.capitalize!
+    player_color = color[number - 1]
+    Player.new(name, player_color)
+  end
 
-  def assign_current_player(player) end
+  def assign_current_player(turn)
+    turn.odd? ? @player_one : @player_two
+  end
 
   def play() end
 
