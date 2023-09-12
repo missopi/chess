@@ -3,7 +3,7 @@
 require_relative '../lib/piece'
 
 # class for creating chessboard
-class chessboard
+class Chessboard
   attr_reader :board
 
   def initialize
@@ -13,12 +13,14 @@ class chessboard
   def display_board
   end
 
-  def place_piece(location, piece)
+  # setter method to place piece on board
+  def []=(location, piece)
     row, column = location
     board[row][column] = piece
   end
 
-  def get_piece(location)
+  # setter method to retreive location of piece on board
+  def [](location)
     row, column = location
     board[row][column]
   end
@@ -32,3 +34,8 @@ class chessboard
   def stalemate?
   end
 end
+
+board = Chessboard.new
+loc = [0, 3]
+board[loc] = 'K'
+p board.board
