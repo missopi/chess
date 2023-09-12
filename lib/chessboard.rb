@@ -33,15 +33,6 @@ class Chessboard
       row >= 0 &&
       column >= 0
   end
-
-  def check?
-  end
-
-  def checkmate?
-  end
-
-  def stalemate?
-  end
 end
 
 board = Chessboard.new
