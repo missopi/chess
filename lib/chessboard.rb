@@ -4,7 +4,7 @@ require_relative '../lib/piece'
 
 # class for creating chessboard
 class chessboard
-  attr_accessor :board
+  attr_reader :board
 
   def initialize
     @board = Array.new(8) { Array.new(8) }
@@ -14,7 +14,7 @@ class chessboard
   end
 
   def update_board(piece, row, column)
-    @board[row][column] = piece
+    board[row][column] = piece
   end
 
   def move(from, to) end
