@@ -13,7 +13,8 @@ class chessboard
   def display_board
   end
 
-  def update_board(piece, row, column)
+  def update_board(piece, location)
+    row, column = location
     board[row][column] = piece
   end
 
