@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative '../lib/piece'
+
 # class for creating chessboard
 class chessboard
   attr_accessor :board
