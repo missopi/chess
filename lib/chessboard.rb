@@ -25,6 +25,15 @@ class Chessboard
     board[row][column]
   end
 
+  def valid_location?(location)
+    row, column = location
+
+    row < board.length &&
+      column < board.first.length &&
+      row >= 0 &&
+      column >= 0
+  end
+
   def check?
   end
 
