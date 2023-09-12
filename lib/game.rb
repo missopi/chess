@@ -9,7 +9,14 @@ class Game
     @turn = turn
   end
 
-  def instructions() end
+  def instructions
+    puts "\n"
+    puts '-------------------- Chess -----------------------'
+    puts "\n"
+    puts 'Instructions for how to play chess can be found at'
+    puts 'https://en.wikipedia.org/wiki/Chess.'
+    puts "\n"
+  end
 
   def create_player(number)
     puts "\nPlayer #{number}, enter your name:"
