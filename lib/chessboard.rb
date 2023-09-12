@@ -13,12 +13,15 @@ class chessboard
   def display_board
   end
 
-  def update_board(piece, location)
+  def place_piece(location, piece)
     row, column = location
     board[row][column] = piece
   end
 
-  def move(from, to) end
+  def get_piece(location)
+    row, column = location
+    board[row][column]
+  end
 
   def check?
   end
