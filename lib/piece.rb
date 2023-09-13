@@ -17,6 +17,7 @@ end
 # subclass for pawn specific characteristics
 class Pawn < Piece
   def valid_moves(location)
+    [[0, 1]]
   end
 
   # print icon of piece
@@ -36,6 +37,12 @@ end
 # subclass for rook specific characteristics
 class Rook < Piece
   def valid_moves(location)
+    [
+      [0, 1],
+      [1, 0],
+      [-1, 0],
+      [0, -1]
+    ]
   end
 
    # print icon of piece
@@ -47,6 +54,12 @@ end
 # subclass for bishop specific characteristics
 class Bishop < Piece
   def valid_moves(location)
+    [
+      [-1, 1],
+      [1, 1],
+      [-1, -1],
+      [1, -1]
+    ]
   end
 
    # print icon of piece
@@ -58,6 +71,16 @@ end
 # subclass for knight specific characteristics
 class Knight < Piece
   def valid_moves(current_position)
+    [
+      [2, 1],
+      [1, 2],
+      [-1, -2],
+      [-2, -1],
+      [-1, 2],
+      [-2, 1],
+      [1, -2],
+      [2, -1]
+    ]
   end
 
    # print icon of piece
@@ -73,6 +96,16 @@ end
 # subclass for queen specific characteristics
 class Queen < Piece
   def valid_moves(current_position)
+    [
+      [0, 1],
+      [1, 0],
+      [-1, 0],
+      [0, -1],
+      [-1, 1],
+      [1, 1],
+      [-1, -1],
+      [1, -1]
+    ]
   end
 
    # print icon of piece
@@ -84,6 +117,16 @@ end
 # subclass for king specific characteristics
 class King < Piece
   def valid_moves(current_position)
+    [
+      [0, 1],
+      [1, 0],
+      [-1, 0],
+      [0, -1],
+      [-1, 1],
+      [1, 1],
+      [-1, -1],
+      [1, -1]
+    ]
   end
 
    # print icon of piece
