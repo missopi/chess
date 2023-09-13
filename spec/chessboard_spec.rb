@@ -21,10 +21,30 @@ describe Chessboard do
 
   describe '#[]=' do
     subject(:place_piece) { described_class.new }
+
+    context 'when a valid position is chosen' do
+      it 'places a piece' do
+        loc = [0, 3]
+        place_piece[loc] = 'KING'
+        place = place_piece.board[0][3]
+        expect(place).to eq('KING')
+      end
+    end
   end
 
   describe '#[]' do
     subject(:get_piece) { described_class.new }
+    context 'when a valid position is chosen' do
+      before do
+        loc = [3, 4]
+        get_piece[loc] = 'QUEEN'
+      end
+
+      it 'returns piece' do
+        get = get_piece[[3, 4]]
+        expect(get).to eq('QUEEN')
+      end
+    end
   end
 
   describe '#valid_location' do
