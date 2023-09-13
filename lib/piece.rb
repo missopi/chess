@@ -2,23 +2,15 @@
 
 # class for creating chess pieces
 class Piece
-attr_accessor :color, :location
+attr_reader :color, :location
 
-  def initialize(color, location)
+  def initialize(color)
     @color = color
     @location = location
   end
 
   def can_leap?
     return false
-  end
-
-  def row
-    location.first
-  end
-
-  def column
-    location.last
   end
 end
 
@@ -103,7 +95,3 @@ class King < Piece
   def castling(current_position)
   end
 end
-
-
-pawn = Pawn.new(:white, [0, 0])
-p pawn.to_s
