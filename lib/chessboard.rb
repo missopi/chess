@@ -34,8 +34,3 @@ class Chessboard
       column >= 0
   end
 end
-
-board = Chessboard.new
-loc = [0, 3]
-board[loc] = 'K'
-p board.board
