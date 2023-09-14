@@ -2,7 +2,7 @@
 
 # class for creating chess pieces
 class Piece
-attr_reader :color, :location
+  attr_reader :color, :location
 
   def initialize(color)
     @color = color
@@ -10,7 +10,7 @@ attr_reader :color, :location
   end
 
   def can_leap?
-    return false
+    false
   end
 end
 
@@ -26,12 +26,10 @@ class Pawn < Piece
   end
 
   # can move 2 spaces to capture pawn after two step advance
-  def en_passant(location)
-  end
+  def en_passant(location) end
 
   # can upgrade to either queen, rook, bishop or knight when at 8th row
-  def promotion(location, piece)
-  end
+  def promotion(location, piece) end
 end
 
 # subclass for rook specific characteristics
@@ -45,8 +43,8 @@ class Rook < Piece
     ]
   end
 
-   # print icon of piece
-   def to_s
+  # print icon of piece
+  def to_s
     color == :white ? '♖' : '♜'
   end
 end
@@ -62,15 +60,15 @@ class Bishop < Piece
     ]
   end
 
-   # print icon of piece
-   def to_s
+  # print icon of piece
+  def to_s
     color == :white ? '♗' : '♝'
   end
 end
 
 # subclass for knight specific characteristics
 class Knight < Piece
-  def valid_moves(current_position)
+  def valid_moves(location)
     [
       [2, 1],
       [1, 2],
@@ -83,8 +81,8 @@ class Knight < Piece
     ]
   end
 
-   # print icon of piece
-   def to_s
+  # print icon of piece
+  def to_s
     color == :white ? '♘' : '♞'
   end
 
@@ -95,7 +93,7 @@ end
 
 # subclass for queen specific characteristics
 class Queen < Piece
-  def valid_moves(current_position)
+  def valid_moves(location)
     [
       [0, 1],
       [1, 0],
@@ -108,15 +106,15 @@ class Queen < Piece
     ]
   end
 
-   # print icon of piece
-   def to_s
+  # print icon of piece
+  def to_s
     color == :white ? '♕' : '♛'
   end
 end
 
 # subclass for king specific characteristics
 class King < Piece
-  def valid_moves(current_position)
+  def valid_moves(location)
     [
       [0, 1],
       [1, 0],
@@ -129,12 +127,11 @@ class King < Piece
     ]
   end
 
-   # print icon of piece
-   def to_s
+  # print icon of piece
+  def to_s
     color == :white ? '♔' : '♚'
   end
 
   # once per game king can move 2 spaces and place rook on space skipped over
-  def castling(current_position)
-  end
+  def castling(current_position) end
 end
