@@ -7,29 +7,28 @@ class Chessboard
   attr_reader :board
 
   def self.start_chess
-    board = self.new
-    8.times do |x|
-      board[[1, x]] = Pawn.new(:black)
-      board[[6, x]] = Pawn.new(:white)
+    start = new
+    8.times do |c|
+      start[[1, c]] = Pawn.new(:black)
+      start[[6, c]] = Pawn.new(:white)
     end
-
-    board[[0, 0]] = Rook.new(:black)
-    board[[0, 1]] = Knight.new(:black)
-    board[[0, 2]] = Bishop.new(:black)
-    board[[0, 3]] = Queen.new(:black)
-    board[[0, 4]] = King.new(:black)
-    board[[0, 5]] = Bishop.new(:black)
-    board[[0, 6]] = Knight.new(:black)
-    board[[0, 7]] = Rook.new(:black)
-    board[[7, 0]] = Rook.new(:white)
-    board[[7, 1]] = Knight.new(:white)
-    board[[7, 2]] = Bishop.new(:white)
-    board[[7, 3]] = Queen.new(:white)
-    board[[7, 4]] = King.new(:white)
-    board[[7, 5]] = Bishop.new(:white)
-    board[[7, 6]] = Knight.new(:white)
-    board[[7, 7]] = Rook.new(:white)
-    board
+    start[[0, 0]] = Rook.new(:black)
+    start[[0, 1]] = Knight.new(:black)
+    start[[0, 2]] = Bishop.new(:black)
+    start[[0, 3]] = Queen.new(:black)
+    start[[0, 4]] = King.new(:black)
+    start[[0, 5]] = Bishop.new(:black)
+    start[[0, 6]] = Knight.new(:black)
+    start[[0, 7]] = Rook.new(:black)
+    start[[7, 0]] = Rook.new(:white)
+    start[[7, 1]] = Knight.new(:white)
+    start[[7, 2]] = Bishop.new(:white)
+    start[[7, 3]] = Queen.new(:white)
+    start[[7, 4]] = King.new(:white)
+    start[[7, 5]] = Bishop.new(:white)
+    start[[7, 6]] = Knight.new(:white)
+    start[[7, 7]] = Rook.new(:white)
+    start
   end
 
   def initialize

@@ -21,5 +21,3 @@ class RenderBoard
   end
 end
 
-render = RenderBoard.new(Chessboard.new)
-render.render
