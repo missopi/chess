@@ -87,7 +87,7 @@ class Knight < Piece
   end
 
   def can_leap?
-    return true
+    true
   end
 end
 
