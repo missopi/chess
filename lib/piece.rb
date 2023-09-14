@@ -22,7 +22,7 @@ class Pawn < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♙' : '♟'
+    color == :white ? ' ♙ ' : ' ♟ '
   end
 
   # can move 2 spaces to capture pawn after two step advance
@@ -45,7 +45,7 @@ class Rook < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♖' : '♜'
+    color == :white ? ' ♖ ' : ' ♜ '
   end
 end
 
@@ -62,7 +62,7 @@ class Bishop < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♗' : '♝'
+    color == :white ? ' ♗ ' : ' ♝ '
   end
 end
 
@@ -83,7 +83,7 @@ class Knight < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♘' : '♞'
+    color == :white ? ' ♘ ' : ' ♞ '
   end
 
   def can_leap?
@@ -108,7 +108,7 @@ class Queen < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♕' : '♛'
+    color == :white ? ' ♕ ' : ' ♛ '
   end
 end
 
@@ -129,7 +129,7 @@ class King < Piece
 
   # print icon of piece
   def to_s
-    color == :white ? '♔' : '♚'
+    color == :white ? ' ♔ ' : ' ♚ '
   end
 
   # once per game king can move 2 spaces and place rook on space skipped over
