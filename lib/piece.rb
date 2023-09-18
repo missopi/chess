@@ -9,6 +9,10 @@ class Piece
     @color = color
   end
 
+  def opponent?(location)
+    !board[location].nil? && board[location].color != color
+  end
+
   def can_leap?
     false
   end
