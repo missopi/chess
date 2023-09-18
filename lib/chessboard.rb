@@ -6,11 +6,12 @@ require_relative '../lib/piece'
 class Chessboard
   attr_reader :board
 
+  # pieces in starting positions on board
   def self.start_chess
     start = new
-    8.times do |c|
-      start[[1, c]] = Pawn.new(:black)
-      start[[6, c]] = Pawn.new(:white)
+    8.times do |column|
+      start[[1, column]] = Pawn.new(:black)
+      start[[6, column]] = Pawn.new(:white)
     end
     [[0, :black], [7, :white]].each do |(row, color)|
       start[[row, 0]] = Rook.new(color)
