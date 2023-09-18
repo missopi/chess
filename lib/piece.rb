@@ -2,11 +2,11 @@
 
 # class for creating chess pieces
 class Piece
-  attr_reader :color, :location
+  attr_reader :color, :board
 
-  def initialize(color)
+  def initialize(board, color)
+    @board = board
     @color = color
-    @location = location
   end
 
   def can_leap?
