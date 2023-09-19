@@ -1,5 +1,27 @@
 # frozen_string_literal: true
 
+# module for piece that can move multiple spaces in one turn
+module Multimovable
+  def valid_moves
+    moves = []
+    possible_directions.each do |(dir_r, dir_c)|
+      current_r, current_c = location
+
+      loop do
+        current_loc = [current_r += dir_r, current_c += dir_c]
+        break unless board.valid_location?(current_loc)
+
+        moves.push(current_loc) if board.empty_space?(current_loc)
+        if opponent?(current_loc)
+          moves.push(current_loc)
+          break
+        end
+      end
+    end
+    moves
+  end
+end
+
 # class for creating chess pieces
 class Piece
   attr_reader :color, :location, :board
@@ -13,23 +35,11 @@ class Piece
   def opponent?(location)
     !board[location].nil? && board[location].color != color
   end
-
-  def can_leap?
-    false
-  end
 end
 
 # subclass for pawn specific characteristics
 class Pawn < Piece
-  def valid_moves(location)
-    move = []
-    start_r, start_c = location
-    dir_r, dir_c = possible_directions
-    current_r = start_r + dir_r
-    current_c = start_c + dir_c
-    current_loc = [current_r, current_c]
-    move.push(current_loc) if board.empty_space?(location)
-    move
+  def valid_moves
   end
 
   def possible_directions
@@ -50,8 +60,7 @@ end
 
 # subclass for rook specific characteristics
 class Rook < Piece
-  def valid_moves(location)
-  end
+  include Multimovable
 
   def possible_directions
     [
@@ -70,8 +79,7 @@ end
 
 # subclass for bishop specific characteristics
 class Bishop < Piece
-  def valid_moves(location)
-  end
+  include Multimovable
 
   def possible_directions
     [
@@ -118,8 +126,7 @@ end
 
 # subclass for queen specific characteristics
 class Queen < Piece
-  def valid_moves(location)
-  end
+  include Multimovable
 
   def possible_directions
     [
