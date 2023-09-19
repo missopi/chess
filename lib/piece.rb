@@ -1,5 +1,18 @@
 # frozen_string_literal: true
 
+# module for piece that can move one space in one turn
+module Singlemovable
+  def valid_moves
+    moves = []
+    possible_directions.each do |(dir_r, dir_c)|
+      current_r, current_c = location
+      current_loc = [current_r + dir_r, current_c + dir_c]
+      moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
+    end
+    moves
+  end
+end
+
 # module for piece that can move multiple spaces in one turn
 module Multimovable
   def valid_moves
@@ -100,15 +113,7 @@ end
 
 # subclass for knight specific characteristics
 class Knight < Piece
-  def valid_moves
-    moves = []
-    possible_directions.each do |(dir_r, dir_c)|
-      current_r, current_c = location
-      current_loc = [current_r + dir_r, current_c + dir_c]
-      moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
-    end
-    moves
-  end
+  include Singlemovable
 
   def possible_directions
     [
@@ -154,8 +159,7 @@ end
 
 # subclass for king specific characteristics
 class King < Piece
-  def valid_moves(location)
-  end
+  include Singlemovable
 
   def possible_directions
     [
