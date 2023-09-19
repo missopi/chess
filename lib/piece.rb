@@ -22,6 +22,9 @@ end
 # subclass for pawn specific characteristics
 class Pawn < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [[0, 1]]
   end
 
@@ -40,6 +43,9 @@ end
 # subclass for rook specific characteristics
 class Rook < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [
       [0, 1],
       [1, 0],
@@ -57,6 +63,9 @@ end
 # subclass for bishop specific characteristics
 class Bishop < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [
       [-1, 1],
       [1, 1],
@@ -74,6 +83,9 @@ end
 # subclass for knight specific characteristics
 class Knight < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [
       [2, 1],
       [1, 2],
@@ -99,6 +111,9 @@ end
 # subclass for queen specific characteristics
 class Queen < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [
       [0, 1],
       [1, 0],
@@ -120,6 +135,9 @@ end
 # subclass for king specific characteristics
 class King < Piece
   def valid_moves(location)
+  end
+
+  def possible_directions
     [
       [0, 1],
       [1, 0],
@@ -138,5 +156,5 @@ class King < Piece
   end
 
   # once per game king can move 2 spaces and place rook on space skipped over
-  def castling(current_position) end
+  def castling(location) end
 end
