@@ -42,6 +42,11 @@ class Chessboard
     board[row][column]
   end
 
+  def empty_space?(location)
+    row, column = location
+    board[row][column].nil?
+  end
+
   def valid_location?(location)
     row, column = location
 
