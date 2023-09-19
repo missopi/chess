@@ -22,6 +22,13 @@ end
 # subclass for pawn specific characteristics
 class Pawn < Piece
   def valid_moves(location)
+    move = []
+    start_r, start_c = location
+    dir_r, dir_c = possible_directions
+    current_r = start_r + dir_r
+    current_c = start_c + dir_c
+    current_loc = [current_r, current_c]
+    move.push(current_loc) if board.empty?(location)
   end
 
   def possible_directions
