@@ -28,7 +28,8 @@ class Pawn < Piece
     current_r = start_r + dir_r
     current_c = start_c + dir_c
     current_loc = [current_r, current_c]
-    move.push(current_loc) if board.empty?(location)
+    move.push(current_loc) if board.empty_space?(location)
+    move
   end
 
   def possible_directions
