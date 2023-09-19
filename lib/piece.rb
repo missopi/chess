@@ -2,10 +2,11 @@
 
 # class for creating chess pieces
 class Piece
-  attr_reader :color, :board
+  attr_reader :color, :location, :board
 
-  def initialize(board, color)
+  def initialize(board, location, color)
     @board = board
+    @location = location
     @color = color
   end
 
