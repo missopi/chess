@@ -8,6 +8,7 @@ module Singlemovable
       current_r, current_c = location
       current_loc = [current_r + dir_r, current_c + dir_c]
       moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
+      moves.push(current_loc) if opponent?(current_loc)
     end
     moves
   end
