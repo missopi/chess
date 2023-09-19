@@ -127,10 +127,6 @@ class Knight < Piece
   def to_s
     color == :white ? ' ♘ ' : ' ♞ '
   end
-
-  def can_leap?
-    true
-  end
 end
 
 # subclass for queen specific characteristics
