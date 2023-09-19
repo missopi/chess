@@ -43,7 +43,8 @@ class Pawn < Piece
   end
 
   def possible_directions
-    [[0, 1]]
+    [[0, 1]] if color == :black
+    [[0, -1]] if color == :white
   end
 
   # print icon of piece
@@ -52,10 +53,11 @@ class Pawn < Piece
   end
 
   # can move 2 spaces to capture pawn after two step advance
-  def en_passant(location) end
+  def en_passant
+  end
 
   # can upgrade to either queen, rook, bishop or knight when at 8th row
-  def promotion(location, piece) end
+  def promotion(piece) end
 end
 
 # subclass for rook specific characteristics
@@ -98,7 +100,14 @@ end
 
 # subclass for knight specific characteristics
 class Knight < Piece
-  def valid_moves(location)
+  def valid_moves
+    moves = []
+    possible_directions.each do |(dir_r, dir_c)|
+      current_r, current_c = location
+      current_loc = [current_r + dir_r, current_c + dir_c]
+      moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
+    end
+    moves
   end
 
   def possible_directions
