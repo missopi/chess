@@ -65,7 +65,12 @@ class Pawn < Piece
     two_step = current_row + (forward * 2), current_column
 
     moves.push(one_step) if board.empty_space?(one_step)
-    moves.push(two_step) if board.empty_space?(one_step) && board.empty_space?(two_step)
+    moves.push(two_step) if board.empty_space?(one_step) && board.empty_space?(two_step) && first_move?
+  end
+
+  def first_move?
+    color == :white && current_row == 6 ||
+      color == :black && current_row == 1
   end
 
   def forward
