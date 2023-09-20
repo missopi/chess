@@ -63,7 +63,7 @@ class Chessboard
       self[to] = piece
       piece.location = to
     else
-      puts 'Not a valid move for this piece.'
+      puts "#{to} is not a valid move for this piece."
       puts "Valid moves: #{piece.valid_moves}"
     end
   end
