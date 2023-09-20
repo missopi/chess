@@ -56,9 +56,12 @@ class Pawn < Piece
   def valid_moves
   end
 
+  def forward
+    color == :white ? -1 : 1
+  end
+
   def possible_directions
-    [[0, 1]] if color == :black
-    [[0, -1]] if color == :white
+    [[0, 1]]
   end
 
   # print icon of piece
