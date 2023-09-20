@@ -61,11 +61,48 @@ end
 class Pawn < Piece
   def valid_moves
     moves = []
-    one_step = current_row + forward, current_column
-    two_step = current_row + (forward * 2), current_column
 
     moves.push(one_step) if board.empty_space?(one_step)
-    moves.push(two_step) if board.empty_space?(one_step) && board.empty_space?(two_step) && first_move?
+    moves.push(diagonal_left) if opponent?(diagonal_left)
+    moves.push(diagonal_right) if opponent?(diagonal_right)
+    moves.push(two_step) if first_move? && board.empty_space?(one_step) && board.empty_space?(two_step)
+    # moves.push(en_passant_left) if opponent?(right) and opponent first_move? == two_step
+    # moves.push(en_passant_right) if opponent?(left) and opponent first_move? == two_step
+
+    moves
+  end
+
+  def one_step
+    [current_row + forward, current_column]
+  end
+
+  def two_step
+    [current_row + (forward * 2), current_column]
+  end
+
+  def diagonal_left
+    [current_row + forward, current_column + 1]
+  end
+
+  def diagonal_right
+    [current_row + forward, current_column - 1]
+  end
+
+  # move to capture opponents pawn after their two step advance
+  def en_passant_left
+    [current_row - forward, current_column - 1]
+  end
+
+  def en_passant_right
+    [current_row - forward, current_column + 1]
+  end
+
+  def left
+    [current_row, current_column - 1]
+  end
+
+  def right
+    [current_row, current_column + 1]
   end
 
   def first_move?
@@ -82,12 +119,11 @@ class Pawn < Piece
     color == :white ? ' ♙ ' : ' ♟ '
   end
 
-  # can move 2 spaces to capture pawn after two step advance
-  def en_passant
+  # can upgrade to either queen, rook, bishop or knight when at opponents end
+  def promotion?
+    color == :white && current_row.zero? ||
+      color == :black && current_row == 7
   end
-
-  # can upgrade to either queen, rook, bishop or knight when at 8th row
-  def promotion(piece) end
 end
 
 # subclass for rook specific characteristics
