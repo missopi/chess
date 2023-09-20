@@ -58,9 +58,13 @@ class Chessboard
 
   def move_piece(from, to)
     piece = self[from]
-    puts 'Not a valid move for this piece' unless piece.valid_move?.include(to) && valid_location?(to)
-    self[from] = nil
-    self[to] = piece
-    piece.location = to
+    if piece.valid_moves.include?(to) && valid_location?(to)
+      self[from] = nil
+      self[to] = piece
+      piece.location = to
+    else
+      puts 'Not a valid move for this piece.'
+      puts "Valid moves: #{piece.valid_moves}"
+    end
   end
 end
