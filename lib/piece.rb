@@ -5,8 +5,7 @@ module Singlemovable
   def valid_moves
     moves = []
     possible_directions.each do |(dir_r, dir_c)|
-      current_r, current_c = location
-      current_loc = [current_r + dir_r, current_c + dir_c]
+      current_loc = [current_row + dir_r, current_column + dir_c]
       moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
       moves.push(current_loc) if opponent?(current_loc)
     end
@@ -19,10 +18,9 @@ module Multimovable
   def valid_moves
     moves = []
     possible_directions.each do |(dir_r, dir_c)|
-      current_r, current_c = location
-
+      current_row, current_column = location
       loop do
-        current_loc = [current_r += dir_r, current_c += dir_c]
+        current_loc = [current_row += dir_r, current_column += dir_c]
         break unless board.valid_location?(current_loc)
 
         moves.push(current_loc) if board.empty_space?(current_loc)
@@ -49,18 +47,31 @@ class Piece
   def opponent?(location)
     !board[location].nil? && board[location].color != color
   end
+
+  def current_row
+    location.first
+  end
+
+  def current_column
+    location.last
+  end
 end
 
 # subclass for pawn specific characteristics
 class Pawn < Piece
   def valid_moves
+    moves = []
+    one_step = current_row + forward, current_column
+    two_step = current_row + (forward * 2), current_column
 
+    moves.push(one_step) if board.empty_space?(one_step)
+    moves.push(two_step) if board.empty_space?(one_step) && board.empty_space?(two_step)
   end
 
   def forward
     color == :white ? -1 : 1
   end
-  
+
   # print icon of piece
   def to_s
     color == :white ? ' ♙ ' : ' ♟ '
