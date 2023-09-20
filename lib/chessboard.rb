@@ -55,4 +55,11 @@ class Chessboard
       row >= 0 &&
       column >= 0
   end
+
+  def move_piece(from, to)
+    piece = self[from]
+    puts 'Not a valid move for this piece' unless piece.valid_move?.include(to) && valid_location?(to)
+    self[from] = nil
+    self[to] = piece
+  end
 end
