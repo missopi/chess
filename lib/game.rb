@@ -7,9 +7,10 @@ require_relative '../lib/render_board'
 
 # class for the chess gameplay
 class Game
-  attr_reader :board, :player_one, :player_two, :color
+  attr_reader :board, :color
+  attr_accessor :name
 
-  def initialize(turn = 1)
+  def initialize(board, turn = 1)
     @board = board
     @color = %i[white black]
     @turn = turn
@@ -26,7 +27,7 @@ class Game
 
   def create_player(number)
     puts "\nPlayer #{number}, enter your name:"
-    name = gets.chomp.capitalize!
+    name = gets.chomp.capitalize
     player_color = color[number - 1]
     Player.new(name, player_color)
   end
@@ -39,9 +40,18 @@ class Game
     instructions
     @player_one = create_player(1)
     @player_two = create_player(2)
+    loop do
+      current_player = assign_current_player(@turn)
+      player_turn(current_player)
+      @turn += 1
+      # break when game_over?
+    end
   end
 
-  def player_turn(player) end
+  def player_turn(player)
+    puts "It's #{player.name}'s turn"
+    puts "Choose a #{player.color} piece to move: "
+  end
 
   def player_input(player) end
 

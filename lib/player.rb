@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-# class for creating players 
+# class for creating players
 class Player
   attr_accessor :name, :color
 
