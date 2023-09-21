@@ -5,10 +5,11 @@ require_relative '../lib/render_board'
 
 # class for the chess gameplay
 class Game
-  attr_reader :board
+  attr_reader :board, :player_one, :player_two, :color
 
   def initialize(turn = 1)
-    @board = Chessboard.new
+    @board = board
+    @color = %i[white black]
     @turn = turn
   end
 
@@ -29,7 +30,7 @@ class Game
   end
 
   def assign_current_player(turn)
-    turn.odd? ? @player_one : @player_two
+    turn.odd? ? player_one : player_two
   end
 
   def play() end
