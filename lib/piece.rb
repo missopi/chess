@@ -29,6 +29,7 @@ module Multimovable
           moves.push(current_loc)
           break
         end
+        moves.push(current_loc)
       end
     end
     moves
