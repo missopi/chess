@@ -51,9 +51,12 @@ class Game
   def player_turn(player)
     puts "It's #{player.name}'s turn"
     puts "Choose a #{player.color} piece to move: "
+    player_input(player)
   end
 
-  def player_input(player) end
+  def player_input(player)
+    player.input_position
+  end
 
   def valid_move?(move) end
 
