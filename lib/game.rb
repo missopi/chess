@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../lib/chessboard'
 require_relative '../lib/piece'
 require_relative '../lib/player'
@@ -30,14 +32,18 @@ class Game
   end
 
   def assign_current_player(turn)
-    turn.odd? ? player_one : player_two
+    turn.odd? ? @player_one : @player_two
   end
 
-  def play() end
+  def play
+    instructions
+    @player_one = create_player(1)
+    @player_two = create_player(2)
+  end
 
   def player_turn(player) end
 
-  def player_input(current_player) end
+  def player_input(player) end
 
   def valid_move?(move) end
 
