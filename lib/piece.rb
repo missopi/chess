@@ -23,7 +23,8 @@ module Multimovable
         current_loc = [current_row += dir_r, current_column += dir_c]
         break unless board.valid_location?(current_loc)
 
-        moves.push(current_loc) if board.empty_space?(current_loc)
+        break unless board.empty_space?(current_loc)
+
         if opponent?(current_loc)
           moves.push(current_loc)
           break
