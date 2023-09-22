@@ -13,7 +13,8 @@ class Player
     position = gets.chomp.split(//)
     position.map do |part|
       part.upcase!.gsub!(/[A-Z]/) { |m| m.ord - 64 } if ('a'..'g').cover?(part) || ('A'..'G').cover?(part)
-      part.to_i - 1
     end
+    position[0], position[1] = position[1], position[0]
+    position.map { |part| part.to_i - 1 }
   end
 end
