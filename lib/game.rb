@@ -44,18 +44,23 @@ class Game
       current_player = assign_current_player(@turn)
       player_turn(current_player)
       @turn += 1
-      # break when game_over?
+      break if game_over?
     end
   end
 
   def player_turn(player)
     puts "It's #{player.name}'s turn"
     puts "Choose a #{player.color} piece to move: "
+    player_input_from(player)
+    puts 'Choose a position to move to: '
     player_input(player)
   end
 
-  def player_input(player)
-    player.input_position
+  def player_input_from(player)
+    loop do
+      from_pos = player.input_position
+      break if board[from_pos].color == player.color
+    end
   end
 
   def valid_move?(move) end
