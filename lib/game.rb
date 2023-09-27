@@ -53,13 +53,20 @@ class Game
     puts "Choose a #{player.color} piece to move: "
     player_input_from(player)
     puts 'Choose a position to move to: '
-    player_input(player)
+    player_input_to(player)
   end
 
   def player_input_from(player)
     loop do
       from_pos = player.input_position
       break if board[from_pos].color == player.color
+    end
+  end
+
+  def player_input_to(player)
+    loop do
+      to_pos = player.input_position
+      break if board[to_pos].empty_space? && board[to_pos].valid_location? && piece.valid_moves
     end
   end
 
@@ -73,4 +80,3 @@ class Game
 
   def game_over?() end
 end
-
