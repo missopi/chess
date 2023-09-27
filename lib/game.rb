@@ -10,9 +10,9 @@ class Game
   attr_reader :board, :color, :board_render
   attr_accessor :name
 
-  def initialize(board, board_render_class, turn = 1)
+  def initialize(board, render_class, turn = 1)
     @board = board
-    @board_render = board_render_class.new(board)
+    @board_render = render_class.new(board)
     @color = %i[white black]
     @turn = turn
   end
