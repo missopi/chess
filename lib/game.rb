@@ -52,22 +52,28 @@ class Game
   def player_turn(player)
     puts "It's #{player.name}'s turn"
     puts "Choose a #{player.color} piece to move: "
-    player_input_from(player)
+    from_pos = player_input_from(player)
     puts 'Choose a position to move to: '
-    player_input_to(player)
+    to_pos = player_input_to(player)
+    board.move_piece(from_pos, to_pos)
+    board_render.render
   end
 
   def player_input_from(player)
     loop do
-      from_pos = player.input_position
-      break if board[from_pos].color == player.color
+      from = player.input_position
+      return from if board[from].color == player.color
+
+      puts 'Invalid choice.'
     end
   end
 
   def player_input_to(player)
     loop do
-      to_pos = player.input_position
-      break if board.empty_space?(to_pos) && board.valid_location?(to_pos) && piece.valid_moves
+      to = player.input_position
+      return to if board.empty_space?(to_pos) && board.valid_location?(to_pos) && piece.valid_moves
+
+      puts 'Invalid choice.'
     end
   end
 
