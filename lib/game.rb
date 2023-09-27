@@ -63,7 +63,7 @@ class Game
   def player_input_from(player)
     loop do
       from = player.input_position
-      return from if board[from].color == player.color
+      return from if !board[from].nil? && board[from].color == player.color
 
       puts 'Invalid choice.'
     end
