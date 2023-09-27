@@ -66,7 +66,7 @@ class Game
   def player_input_to(player)
     loop do
       to_pos = player.input_position
-      break if board[to_pos].empty_space? && board[to_pos].valid_location? && piece.valid_moves
+      break if board.empty_space?(to_pos) && board.valid_location?(to_pos) && piece.valid_moves
     end
   end
 
