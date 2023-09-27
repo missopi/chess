@@ -9,13 +9,10 @@ require_relative '../lib/game'
 # cb = Chessboard.start_chess
 # chess = RenderBoard.new(cb)
 # chess.render
+# b[[1, 3]].valid_moves
+# b.move_piece([1, 3], [3, 3])
+# chess.render
 
-b = Chessboard.start_chess
-chess = RenderBoard.new(b)
-b[[1, 3]].valid_moves
-b.move_piece([1, 3], [3, 3])
-chess.render
-
-g = Game.new(b)
-g.play
-g.convert_back
+board = Chessboard.start_chess
+game = Game.new(board, RenderBoard)
+game.play
