@@ -7,11 +7,12 @@ require_relative '../lib/render_board'
 
 # class for the chess gameplay
 class Game
-  attr_reader :board, :color
+  attr_reader :board, :color, :board_render
   attr_accessor :name
 
-  def initialize(board, turn = 1)
+  def initialize(board, board_render, turn = 1)
     @board = board
+    @board_render = board_render
     @color = %i[white black]
     @turn = turn
   end
