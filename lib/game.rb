@@ -72,7 +72,7 @@ class Game
   def player_input_to(player)
     loop do
       to = player.input_position
-      return to if board.empty_space?(to_pos) && board.valid_location?(to_pos) && piece.valid_moves
+      return to if board.valid_location?(to_pos) && piece.valid_moves
 
       puts 'Invalid choice.'
     end
