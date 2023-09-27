@@ -78,9 +78,5 @@ class Game
     end
   end
 
-  def valid_move?(move) end
-
-  def ask_promotion_piece() end
-
   def game_over?() end
 end
