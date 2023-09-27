@@ -39,6 +39,7 @@ class Game
 
   def play
     instructions
+    board_render.render
     @player_one = create_player(1)
     @player_two = create_player(2)
     loop do
