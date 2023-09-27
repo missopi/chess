@@ -79,11 +79,7 @@ class Game
 
   def valid_move?(move) end
 
-  def space_available?(move) end
-
   def ask_promotion_piece() end
-
-  def make_move(move) end
 
   def game_over?() end
 end
