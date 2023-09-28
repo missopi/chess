@@ -39,7 +39,6 @@ class Game
 
   def play
     instructions
-    board_render.render
     @player_one = create_player(1)
     @player_two = create_player(2)
     loop do
@@ -51,16 +50,17 @@ class Game
   end
 
   def player_turn(player)
+    # flip board
     puts "It's #{player.name}'s turn"
-    puts "Choose a #{player.color} piece to move: "
+    board_render.render
     from_pos = player_input_from(player)
-    puts 'Choose a position to move to: '
     to_pos = player_input_to(player)
     board.move_piece(from_pos, to_pos)
     board_render.render
   end
 
   def player_input_from(player)
+    puts "Choose a #{player.color} piece to move: "
     loop do
       from = player.input_position
       return from if !board[from].nil? && board[from].color == player.color
@@ -70,11 +70,12 @@ class Game
   end
 
   def player_input_to(player)
+    puts 'Choose a position to move to: '
     loop do
       to = player.input_position
       return to if board.valid_location?(to)
 
-      puts 'Invalid choice.'
+      puts 'Location chosen not on board.'
     end
   end
 
