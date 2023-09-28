@@ -51,11 +51,14 @@ class Game
 
   def player_turn(player)
     # flip board
-    puts "It's #{player.name}'s turn"
+    puts "\nIt's #{player.name}'s turn"
     board_render.render
-    from_pos = player_input_from(player)
-    to_pos = player_input_to(player)
-    board.move_piece(from_pos, to_pos)
+    loop do
+      from_pos = player_input_from(player)
+      to_pos = player_input_to(player)
+      move = board.move_piece(from_pos, to_pos)
+      return move unless move.nil?
+    end
     board_render.render
   end
 
