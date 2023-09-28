@@ -9,7 +9,7 @@ module Singlemovable
       moves.push(current_loc) if board.empty_space?(current_loc) && board.valid_location?(current_loc)
       moves.push(current_loc) if opponent?(current_loc)
     end
-    moves
+    moves.select { |move| board.valid_location?(move) }
   end
 end
 
