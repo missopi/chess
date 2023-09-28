@@ -56,6 +56,11 @@ class Chessboard
       column >= 0
   end
 
+  # method to select only the pieces on the board and reject the empty spaces
+  def pieces
+    board.flatten.reject(&:nil?)
+  end
+
   def move_piece(from, to)
     piece = self[from]
     if piece.valid_moves.include?(to) && valid_location?(to)
