@@ -72,11 +72,13 @@ class Game
   def player_input_to(player)
     loop do
       to = player.input_position
-      return to if board.valid_location?(to) && piece.valid_moves
+      return to if board.valid_location?(to)
 
       puts 'Invalid choice.'
     end
   end
 
-  def game_over?() end
+  def game_over?
+    false
+  end
 end
