@@ -66,8 +66,11 @@ class Chessboard
     king.location
   end
 
-  def check(color)
-    king_loc == king(color)
+  def check?(color)
+    king_loc = king(color)
+    pieces.reject { |piece| piece.color == color }.each do |piece|
+      return true if piece.valid_moves.include?(king_loc)
+    end
   end
 
   def checkmate(color) end
