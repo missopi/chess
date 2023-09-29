@@ -65,21 +65,27 @@ class Chessboard
 
   # method to isolate king's location
   def king(color)
-    king = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
-    king.location
+    pieces.find { |piece| piece.color == color && piece.is_a?(King) }
   end
 
   # method for checking if the king of a certain color is in check
   def check?(color)
-    king_loc = king(color)
+    king = king(color)
+    king_loc = king.location
     pieces.reject { |piece| piece.color == color }.each do |piece|
       return true if piece.valid_moves.include?(king_loc)
     end
   end
 
   # method for checking if a certin king is in checkmate
-  def checkmate(color)
+  def checkmate?(color)
     return false unless check?(color) # must be in check
+
+    king_check = king(color)
+    pieces.reject { |piece| piece.color == color }.each do |piece|
+      return true if piece.valid_moves.include?(king_check.valid_moves) || king_check.valid_moves.empty?
+    end
+    false
   end
 
   # moving pieces from one location to another on the board
