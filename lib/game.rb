@@ -48,7 +48,11 @@ class Game
       current_player = assign_current_player(@turn)
       player_turn(current_player)
       @turn += 1
-      break if game_over?(current_player)
+      if game_over?(current_player)
+        @turn + 1
+        puts "\n Game over. #{current_player.name} is the winner!"
+        break
+      end
     end
   end
 
