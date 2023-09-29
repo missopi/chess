@@ -77,8 +77,10 @@ class Chessboard
     end
   end
 
-  # method for checking if a ceratin king is in checkmate
-  def checkmate(color) end
+  # method for checking if a certin king is in checkmate
+  def checkmate(color)
+    return false unless check?(color) # must be in check
+  end
 
   # moving pieces from one location to another on the board
   def move_piece(from, to)
