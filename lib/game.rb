@@ -55,7 +55,7 @@ class Game
   # Each player's turn
   def player_turn(player)
     # flip board
-    puts "\n\nIt's #{player.name}'s turn"
+    puts "\nIt's #{player.name}'s turn"
     loop do
       board_render.render
       from_pos = player_input_from(player)
@@ -68,7 +68,7 @@ class Game
 
   # Choosing which piece to move on board
   def player_input_from(player)
-    puts "\nChoose a #{player.color} piece to move: "
+    puts "\n\nChoose a #{player.color} piece to move: "
     loop do
       from = player.input_position
       return from if !board[from].nil? && board[from].color == player.color
