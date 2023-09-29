@@ -62,10 +62,13 @@ class Chessboard
   end
 
   def king(color)
-    pieces.select { |piece| piece.color == color && piece.is_a?(King) }
+    king = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
+    king.location
   end
 
-  def check(color) end
+  def check(color)
+    king_loc == king(color)
+  end
 
   def checkmate(color) end
 
