@@ -93,4 +93,14 @@ class Chessboard
       puts "Invalid move for this piece.\n"
     end
   end
+
+  # Make duplicate of board to test safe moves for king during check
+  def duplicate
+    dup_board = Chessboard.new
+    pieces.each do |piece|
+      dup_piece = piece.class.new(dup_board, piece.location, piece.color)
+      dup_board[dup_piece.location] = dup_piece
+    end
+    dup_board
+  end
 end
