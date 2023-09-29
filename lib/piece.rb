@@ -30,7 +30,7 @@ module Multimovable
           break
         end
         break unless board.empty_space?(current_loc)
-        
+
         moves.push(current_loc)
       end
     end
@@ -77,23 +77,27 @@ class Pawn < Piece
     moves
   end
 
+  # pawn moving single space on board
   def one_step
     [current_row + forward, current_column]
   end
 
+  # pawn moving two spaces (only available on first move)
   def two_step
     [current_row + (forward * 2), current_column]
   end
 
+  # pawn capturing opponent on left
   def diagonal_left
     [current_row + forward, current_column + 1]
   end
 
+  # pawn capturing opponent on right
   def diagonal_right
     [current_row + forward, current_column - 1]
   end
 
-  # move to capture opponents pawn after their two step advance
+  # moves to capture opponents pawn after their two step advance
   def en_passant_left
     [current_row - forward, current_column - 1]
   end
@@ -102,6 +106,7 @@ class Pawn < Piece
     [current_row - forward, current_column + 1]
   end
 
+  # Identifing space directly next to pawn
   def left
     [current_row, current_column - 1]
   end
@@ -110,11 +115,13 @@ class Pawn < Piece
     [current_row, current_column + 1]
   end
 
+  # Ascertaining if the pawn is still in it's starting position
   def first_move?
     color == :white && current_row == 6 ||
       color == :black && current_row == 1
   end
 
+  # Ascertaining which direction is forward on the board
   def forward
     color == :white ? -1 : 1
   end

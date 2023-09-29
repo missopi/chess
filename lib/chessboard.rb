@@ -42,11 +42,13 @@ class Chessboard
     board[row][column]
   end
 
+  # method to show if space at location chosen is an empty space
   def empty_space?(location)
     row, column = location
     board[row][column].nil?
   end
 
+  # method to show if location chosen is on the board
   def valid_location?(location)
     row, column = location
 
@@ -61,11 +63,13 @@ class Chessboard
     board.flatten.reject(&:nil?)
   end
 
+  # method to isolate king's location
   def king(color)
     king = pieces.find { |piece| piece.color == color && piece.is_a?(King) }
     king.location
   end
 
+  # method for checking if the king of a certain color is in check
   def check?(color)
     king_loc = king(color)
     pieces.reject { |piece| piece.color == color }.each do |piece|
@@ -73,8 +77,10 @@ class Chessboard
     end
   end
 
+  # method for checking if a ceratin king is in checkmate
   def checkmate(color) end
 
+  # moving pieces from one location to another on the board
   def move_piece(from, to)
     piece = self[from]
     if piece.valid_moves.include?(to) && valid_location?(to)

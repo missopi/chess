@@ -10,6 +10,7 @@ class RenderBoard
     @board = board
   end
 
+  # Render actual visual representation of board in console
   def render
     8.times do |row|
       puts ' '
@@ -21,6 +22,5 @@ class RenderBoard
         end
       end
     end
-    puts ' '
   end
 end

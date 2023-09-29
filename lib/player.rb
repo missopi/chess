@@ -9,6 +9,7 @@ class Player
     @color = color
   end
 
+  # Taking player input of eg C3 and converting it into board coordinates
   def input_position
     position = gets.chomp.split(//)
     position.map do |part|

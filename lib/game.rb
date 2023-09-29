@@ -26,6 +26,7 @@ class Game
     puts "\n"
   end
 
+  # Get players name and assign color
   def create_player(number)
     puts "\nPlayer #{number}, enter your name:"
     name = gets.chomp.capitalize
@@ -33,10 +34,12 @@ class Game
     Player.new(name, player_color)
   end
 
+  # Switch players after each turn
   def assign_current_player(turn)
     turn.odd? ? @player_one : @player_two
   end
 
+  # Actual game play
   def play
     instructions
     @player_one = create_player(1)
@@ -49,9 +52,10 @@ class Game
     end
   end
 
+  # Each player's turn
   def player_turn(player)
     # flip board
-    puts "\nIt's #{player.name}'s turn"
+    puts "\n\nIt's #{player.name}'s turn"
     loop do
       board_render.render
       from_pos = player_input_from(player)
@@ -62,8 +66,9 @@ class Game
     board_render.render
   end
 
+  # Choosing which piece to move on board
   def player_input_from(player)
-    puts "Choose a #{player.color} piece to move: "
+    puts "\nChoose a #{player.color} piece to move: "
     loop do
       from = player.input_position
       return from if !board[from].nil? && board[from].color == player.color
@@ -72,6 +77,7 @@ class Game
     end
   end
 
+  # Choosing where to put each piece
   def player_input_to(player)
     puts 'Choose a position to move to: '
     loop do
