@@ -61,6 +61,14 @@ class Chessboard
     board.flatten.reject(&:nil?)
   end
 
+  def king(color)
+    pieces.select { |piece| piece.color == color && piece.is_a?(King) }
+  end
+
+  def check(color) end
+
+  def checkmate(color) end
+
   def move_piece(from, to)
     piece = self[from]
     if piece.valid_moves.include?(to) && valid_location?(to)
