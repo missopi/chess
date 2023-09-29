@@ -48,7 +48,7 @@ class Game
       current_player = assign_current_player(@turn)
       player_turn(current_player)
       @turn += 1
-      break if game_over?
+      break if game_over?(current_player)
     end
   end
 
@@ -88,7 +88,7 @@ class Game
     end
   end
 
-  def game_over?
-    false
+  def game_over?(player)
+    board.checkmate?(player.color)
   end
 end
