@@ -56,6 +56,7 @@ class Game
   def player_turn(player)
     # flip board
     puts "\nIt's #{player.name}'s turn"
+    puts "#{player.color} is currently in check." if board.check?(player.color)
     loop do
       board_render.render
       from_pos = player_input_from(player)
