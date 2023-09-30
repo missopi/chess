@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/piece'
+require_relative '../lib/pieces'
 
 # class for creating chessboard
 class Chessboard
