@@ -15,11 +15,7 @@ class RenderBoard
     8.times do |row|
       puts ' '
       8.times do |column|
-        if board[[row, column]].nil?
-          print '   '
-        else
-          print board[[row, column]]
-        end
+        print board[[row, column]]
       end
     end
   end
