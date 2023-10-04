@@ -15,7 +15,7 @@ class RenderBoard
     8.times do |row|
       puts ' '
       8.times do |column|
-        print board[[row, column]]
+        print board[[row, column]].to_s
       end
     end
   end
