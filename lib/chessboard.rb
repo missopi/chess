@@ -27,7 +27,7 @@ class Chessboard
   end
 
   def initialize
-    @board = Array.new(8) { Array.new(8) }
+    @board = Array.new(8) { Array.new(8, NoPiece.instance) }
   end
 
   # setter method to place piece on board
@@ -45,7 +45,7 @@ class Chessboard
   # method to show if space at location chosen is an empty space
   def empty_space?(location)
     row, column = location
-    board[row][column].nil?
+    board[row][column] == NoPiece.instance
   end
 
   # method to show if location chosen is on the board
@@ -92,7 +92,7 @@ class Chessboard
   def move_piece(from, to)
     piece = self[from]
     if piece.valid_moves.include?(to) && valid_location?(to)
-      self[from] = nil
+      self[from] = NoPiece.instance
       self[to] = piece
       piece.location = to
     else

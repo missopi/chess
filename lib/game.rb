@@ -76,7 +76,7 @@ class Game
     puts "\n\nChoose a #{player.color} piece to move: "
     loop do
       from = player.input_position
-      return from if !board[from].nil? && board[from].color == player.color
+      return from if board[from].color == player.color
 
       puts 'Invalid choice.'
     end

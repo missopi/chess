@@ -12,7 +12,7 @@ class Piece
   end
 
   def opponent?(location)
-    !board[location].nil? && board[location].color != color
+    board[location].color != color
   end
 
   def current_row
