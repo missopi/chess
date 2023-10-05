@@ -12,7 +12,7 @@ class Piece
   end
 
   def opponent?(location)
-    board.valid_location?(location) && board[location].color != color
+    board[location].color != color && board[location] != NoPiece.instance
   end
 
   def current_row
