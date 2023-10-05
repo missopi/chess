@@ -73,7 +73,7 @@ class Game
 
   # Choosing which piece to move on board
   def player_input_from(player)
-    puts "\n\nChoose a #{player.color} piece to move: "
+    puts "\nChoose a #{player.color} piece to move: "
     loop do
       from = player.input_position
       return from if board[from].color == player.color

@@ -18,5 +18,6 @@ class RenderBoard
         print board[[row, column]].to_s
       end
     end
+    puts ' '
   end
 end
