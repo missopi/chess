@@ -13,15 +13,10 @@ class Chessboard
       start[[1, column]] = Pawn.new(start, [1, column], :black)
       start[[6, column]] = Pawn.new(start, [6, column], :white)
     end
-    [[0, :black], [7, :white]].each do |(row, color)|
-      start[[row, 0]] = Rook.new(start, [row, 0], color)
-      start[[row, 1]] = Knight.new(start, [row, 1], color)
-      start[[row, 2]] = Bishop.new(start, [row, 2], color)
-      start[[row, 3]] = Queen.new(start, [row, 3], color)
-      start[[row, 4]] = King.new(start, [row, 4], color)
-      start[[row, 5]] = Bishop.new(start, [row, 5], color)
-      start[[row, 6]] = Knight.new(start, [row, 6], color)
-      start[[row, 7]] = Rook.new(start, [row, 7], color)
+    [Rook, Knight, Bishop, Queen, King, Bishop, Knight, Rook].each_with_index do |klass, column|
+      [[0, :black], [7, :white]].each do |(row, color)|
+        start[[row, column]] = klass.new(start, [row, column], color)
+      end
     end
     start
   end
