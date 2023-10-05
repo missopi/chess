@@ -60,7 +60,7 @@ class Chessboard
 
   # method to select only the pieces on the board and reject the empty spaces
   def pieces
-    board.flatten.reject(&:nil?)
+    board.flatten.reject { |piece| piece == NoPiece.instance }
   end
 
   # method to isolate king's location
