@@ -77,10 +77,14 @@ class Chessboard
   def checkmate?(color)
     return false unless check?(color) # must be in check
 
-    king_check = king(color)
+    king_moves = king(color).valid_moves
+    moves = []
     pieces.reject { |piece| piece.color == color }.each do |piece|
-      return true if piece.valid_moves.include?(king_check.valid_moves) || king_check.valid_moves.empty?
+      moves.push(piece.valid_moves)
     end
+    moves.flatten!(1)
+    return true if (king_moves - moves).empty?
+
     false
   end
 
