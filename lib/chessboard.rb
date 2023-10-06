@@ -88,6 +88,15 @@ class Chessboard
     false
   end
 
+  # method for stalemate - no possible moves for anyone
+  def stalemate?
+    available_moves = []
+    pieces.each { |piece| available_moves.push(piece.valid_moves) }
+    return true if available_moves.flatten.empty?
+
+    false
+  end
+
   # moving pieces from one location to another on the board
   def move_piece(from, to)
     piece = self[from]
