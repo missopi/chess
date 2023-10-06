@@ -65,9 +65,8 @@ class Game
       from_pos = player_input_from(player)
       to_pos = player_input_to(player)
       move = board.move_piece(from_pos, to_pos)
-      return move unless move.nil?
-
       board.pawn_promotion(to_pos) unless move.nil?
+      return move unless move.nil?
     end
     board_render.render
   end
