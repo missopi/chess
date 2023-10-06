@@ -70,6 +70,7 @@ class Chessboard
     pieces.reject { |piece| piece.color == color }.each do |piece|
       return true if piece.valid_moves.include?(king_loc)
     end
+    false
   end
 
   # method for checking if a certin king is in checkmate
