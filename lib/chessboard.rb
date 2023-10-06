@@ -111,6 +111,7 @@ class Chessboard
 
   def pawn_promotion(location)
     pawn = self[location]
+    return unless pawn.is_a?(Pawn)
     return unless pawn.promotion_row == true
 
     loop do
