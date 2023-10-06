@@ -109,6 +109,33 @@ class Chessboard
     end
   end
 
+  def pawn_promotion(location)
+    pawn = self[location]
+    return unless pawn.promotion_row == true
+
+    loop do
+      puts 'Which piece do you want to promote your pawn to?'
+      puts '(R)ook, (B)ishop, (K)night or (Q)ueen?'
+      choice = gets.chomp
+      case choice
+      when 'R'
+        self[location] = Rook.new(board, pawn.location, pawn.color)
+        break
+      when 'B'
+        self[location] = Bishop.new(board, pawn.location, pawn.color)
+        break
+      when 'K'
+        self[location] = Knight.new(board, pawn.location, pawn.color)
+        break
+      when 'Q'
+        self[location] = Queen.new(board, pawn.location, pawn.color)
+        break
+      else
+        puts 'Invalid choice.'
+      end
+    end
+  end
+
   # Make duplicate of board to test safe moves for king during check
   def duplicate
     dup_board = Chessboard.new
