@@ -49,7 +49,7 @@ class Game
       player_turn(current_player)
       @turn += 1
       if game_over?(current_player)
-        @turn + 1
+        @turn += 1
         puts "\n Game over. #{current_player.name} is the winner!"
         break
       end
@@ -58,7 +58,6 @@ class Game
 
   # Each player's turn
   def player_turn(player)
-    # flip board
     puts "\nIt's #{player.name}'s turn"
     puts "#{player.color} is currently in check." if board.check?(player.color)
     loop do
@@ -67,6 +66,8 @@ class Game
       to_pos = player_input_to(player)
       move = board.move_piece(from_pos, to_pos)
       return move unless move.nil?
+
+      board.pawn_promotion(to_pos)
     end
     board_render.render
   end
@@ -94,6 +95,6 @@ class Game
   end
 
   def game_over?(player)
-    board.checkmate?(player.color)
+    board.checkmate?(player.color) || board.stalemate?
   end
 end
