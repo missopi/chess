@@ -116,20 +116,18 @@ class Chessboard
 
     loop do
       puts 'Which piece do you want to promote your pawn to?'
-      puts '(R)ook, (B)ishop, (K)night or (Q)ueen?'
+      puts '(R)ook, (B)ishop, k(N)ight or (Q)ueen?'
       choice = gets.chomp
-      case choice
-      when 'R'
-        self[location] = Rook.new(board, pawn.location, pawn.color)
-        break
-      when 'B'
-        self[location] = Bishop.new(board, pawn.location, pawn.color)
-        break
-      when 'K'
-        self[location] = Knight.new(board, pawn.location, pawn.color)
-        break
-      when 'Q'
-        self[location] = Queen.new(board, pawn.location, pawn.color)
+
+      chosen_piece = {
+        'R' => Rook.new(board, pawn.location, pawn.color),
+        'B' => Bishop.new(board, pawn.location, pawn.color),
+        'N' => Knight.new(board, pawn.location, pawn.color),
+        'Q' => Queen.new(board, pawn.location, pawn.color)
+      }
+
+      if chosen_piece.key?(choice)
+        self[location] = chosen_piece.fetch(choice)
         break
       else
         puts 'Invalid choice.'
