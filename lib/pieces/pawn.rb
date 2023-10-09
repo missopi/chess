@@ -53,6 +53,13 @@ class Pawn < Piece
     [current_row, current_column + 1]
   end
 
+  def en_passant
+    # if black pawn current row is row 4 or white current row is row 3
+    # if opponent pawn is adjacent on right or left
+    # pawn can move diagonal one step (behind other pawn)
+    # opponent pawn == NoPiece.instance
+  end
+
   # Ascertaining if the pawn is still in it's starting position
   def first_move?
     color == :white && current_row == 6 ||
