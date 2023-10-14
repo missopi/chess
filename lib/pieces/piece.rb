@@ -29,6 +29,6 @@ class Piece
 
   def move(to)
     @previous_location = location
-    location = to
+    @location = to
   end
 end
