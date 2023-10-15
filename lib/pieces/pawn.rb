@@ -9,9 +9,8 @@ class Pawn < Piece
     moves.push(diagonal_left) if opponent?(diagonal_left)
     moves.push(diagonal_right) if opponent?(diagonal_right)
     moves.push(two_step) if first_move? && board.empty_space?(one_step) && board.empty_space?(two_step)
-    # moves.push(en_passant_left) if opponent?(right) and opponent first_move? == two_step
-    # moves.push(en_passant_right) if opponent?(left) and opponent first_move? == two_step
-
+    moves.push(diagonal_left) if en_passant_row? && opponent_pawn?(left)
+    moves.push(diagonal_right) if en_passant_row? && opponent_pawn?(right)
     moves
   end
 
@@ -35,13 +34,9 @@ class Pawn < Piece
     [current_row + forward, current_column - 1]
   end
 
-  # moves to capture opponents pawn after their two step advance
-  def en_passant_left
-    [current_row - forward, current_column - 1]
-  end
-
-  def en_passant_right
-    [current_row - forward, current_column + 1]
+  # row possible to do en passant move
+  def en_passant_row?
+    color == :white && current_row == 3 || color == :black && current_row == 4
   end
 
   # Identifing space directly next to pawn
@@ -51,13 +46,6 @@ class Pawn < Piece
 
   def right
     [current_row, current_column + 1]
-  end
-
-  def en_passant
-    # if black pawn current row is row 4 or white current row is row 3
-    # if opponent pawn is adjacent on right or left
-    # pawn can move diagonal one step (behind other pawn)
-    # opponent pawn == NoPiece.instance
   end
 
   # Ascertaining if the pawn is still in it's starting position
