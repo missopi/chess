@@ -4,7 +4,7 @@ require_relative '../lib/pieces'
 
 # class for creating chessboard
 class Chessboard
-  attr_reader :board
+  attr_reader :board, :history
 
   # pieces in starting positions on board
   def self.start_chess
@@ -23,6 +23,7 @@ class Chessboard
 
   def initialize
     @board = Array.new(8) { Array.new(8, NoPiece.instance) }
+    @history = []
   end
 
   # setter method to place piece on board
@@ -104,6 +105,7 @@ class Chessboard
       self[from] = NoPiece.instance
       self[to] = piece
       piece.location = to
+      update_game_record(from, to)
     else
       puts "Invalid move for this piece.\n"
     end
@@ -112,6 +114,10 @@ class Chessboard
   def remove_enpassant_capture(location)
     row, column = location
     board[row][column] = NoPiece.instance
+  end
+
+  def update_game_record(from, to)
+    history << [from, to]
   end
 
   def pawn_promotion(location)
