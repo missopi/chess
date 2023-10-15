@@ -109,6 +109,11 @@ class Chessboard
     end
   end
 
+  def remove_enpassant_capture(location)
+    row, column = location
+    board[row][column] = NoPiece.instance
+  end
+
   def pawn_promotion(location)
     pawn = self[location]
     return unless pawn.is_a?(Pawn)
