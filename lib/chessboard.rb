@@ -2,6 +2,7 @@
 
 require_relative '../lib/pieces'
 require_relative '../lib/en_passant'
+require_relative '../lib/pawn_promotion'
 
 # class for creating chessboard
 class Chessboard
