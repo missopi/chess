@@ -2,11 +2,6 @@
 
 # Contains everything for en-passant move
 module EnPassant
-  def correct_row(from)
-    piece = self[from]
-    piece.color == :white ? piece.current_row == 3 : piece.current_row == 4
-  end
-
   def left_opponent_pawn?(from)
     piece = self[from]
     row, column = from
@@ -26,8 +21,14 @@ module EnPassant
   end
 
   def last_move_pawn_twostep?
-    last_from = @history.last.first
-    last_to = @history.last.last
-    opponent_adjacent?(last_to) && (last_to[0] - last_from[0]).abs == 2
+    last_from = @history[@history.size - 2].first
+    last_to = @history[@history.size - 2].last
+    (last_to[0] - last_from[0]).abs == 2
+  end
+
+  def en_passant_performed?(from, to)
+    return if @history.empty?
+
+    opponent_adjacent?(from) && last_move_pawn_twostep?
   end
 end
