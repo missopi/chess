@@ -6,6 +6,7 @@ require_relative '../lib/en_passant'
 # class for creating chessboard
 class Chessboard
   include EnPassant
+  include PawnPromotion
   attr_reader :board, :history
 
   # pieces in starting positions on board
@@ -121,32 +122,6 @@ class Chessboard
 
   def update_game_record(from, to)
     history << [from, to]
-  end
-
-  def pawn_promotion(location)
-    pawn = self[location]
-    return unless pawn.is_a?(Pawn)
-    return unless pawn.promotion_row == true
-
-    loop do
-      puts 'Which piece do you want to promote your pawn to?'
-      puts '(R)ook, (B)ishop, k(N)ight or (Q)ueen?'
-      choice = gets.chomp
-
-      chosen_piece = {
-        'R' => Rook.new(board, pawn.location, pawn.color),
-        'B' => Bishop.new(board, pawn.location, pawn.color),
-        'N' => Knight.new(board, pawn.location, pawn.color),
-        'Q' => Queen.new(board, pawn.location, pawn.color)
-      }
-
-      if chosen_piece.key?(choice)
-        self[location] = chosen_piece.fetch(choice)
-        break
-      else
-        puts 'Invalid choice.'
-      end
-    end
   end
 
   # Make duplicate of board to test safe moves for king during check
