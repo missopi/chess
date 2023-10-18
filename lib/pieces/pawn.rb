@@ -26,12 +26,12 @@ class Pawn < Piece
 
   # pawn capturing opponent on left
   def diagonal_left
-    [current_row + forward, current_column + 1]
+    [current_row + forward, current_column - 1]
   end
 
   # pawn capturing opponent on right
   def diagonal_right
-    [current_row + forward, current_column - 1]
+    [current_row + forward, current_column + 1]
   end
 
   # row possible to do en passant move
