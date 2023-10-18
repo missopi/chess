@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../lib/pieces'
+require_relative '../lib/en_passant'
 
 # class for creating chessboard
 class Chessboard
+  include EnPassant
   attr_reader :board, :history
 
   # pieces in starting positions on board
