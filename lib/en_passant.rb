@@ -24,4 +24,10 @@ module EnPassant
   def opponent_adjacent?(from)
     left_opponent_pawn?(from) || right_opponent_pawn?(from)
   end
+
+  def last_move_pawn_twostep?
+    last_from = @history.last.first
+    last_to = @history.last.last
+    opponent_adjacent?(last_to) && (last_to[0] - last_from[0]).abs == 2
+  end
 end
