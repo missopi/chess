@@ -26,7 +26,7 @@ module EnPassant
     (last_to[0] - last_from[0]).abs == 2
   end
 
-  def en_passant_performed?(from, to)
+  def en_passant_performed?(from)
     return if @history.empty?
 
     opponent_adjacent?(from) && last_move_pawn_twostep?

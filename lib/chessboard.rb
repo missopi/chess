@@ -108,7 +108,7 @@ class Chessboard
       self[to] = piece
       piece.location = to
       update_game_record(from, to)
-      remove_enpassant_capture(to) if en_passant_performed?(from, to)
+      remove_enpassant_capture(to) if en_passant_performed?(from)
     else
       puts "Invalid move for this piece.\n"
     end
