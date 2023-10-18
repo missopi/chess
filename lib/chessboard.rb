@@ -108,6 +108,7 @@ class Chessboard
       self[to] = piece
       piece.location = to
       update_game_record(from, to)
+      remove_enpassant_capture(to) if en_passant_performed?(from, to)
     else
       puts "Invalid move for this piece.\n"
     end
@@ -115,7 +116,7 @@ class Chessboard
 
   def remove_enpassant_capture(location)
     row, column = location
-    board[row][column] = NoPiece.instance
+    board[row + 1][column] = NoPiece.instance
   end
 
   def update_game_record(from, to)
