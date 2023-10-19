@@ -31,8 +31,12 @@ module EnPassant
   def right_empty?(from)
     piece = self[from]
     row, column = from
-    left = board[row][column + 1]
+    left = board[row][column - 1]
     left == NoPiece.instance
+  end
+
+  def empty_space_adjacent(from)
+    left_empty?(from) || right_empty?(from)
   end
 
   def last_move_pawn_twostep?
