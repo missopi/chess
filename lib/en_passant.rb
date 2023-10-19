@@ -16,38 +16,29 @@ module EnPassant
     right_opponent.is_a?(Pawn) && right_opponent.color != piece.color
   end
 
-  def opponent_adjacent?(from)
+  # Check that opponent pawn is in space adjacent to current player's pawn
+  def opponent_pawn_adjacent?(from)
     left_opponent_pawn?(from) || right_opponent_pawn?(from)
   end
 
-  # check if spaces adjacent to pawn are empty before so I know that twostep and adjacent pawn is new move
-  def left_empty?(from)
-    piece = self[from]
-    row, column = from
-    right = board[row][column + 1]
-    right == NoPiece.instance
-  end
-
-  def right_empty?(from)
-    piece = self[from]
-    row, column = from
-    left = board[row][column - 1]
-    left == NoPiece.instance
-  end
-
-  def empty_space_adjacent(from)
-    left_empty?(from) || right_empty?(from)
-  end
-
+  # Check that last move made by opponent was a two step pawn advance
   def last_move_pawn_twostep?
     last_from = @history[@history.size - 2].first
     last_to = @history[@history.size - 2].last
     (last_to[0] - last_from[0]).abs == 2
   end
 
+  # Check that last move made by opponent ends adjacent to current player's pawn
+  def last_move_adjacent?(from)
+    from = @history.last.first
+    last_to = @history[@history.size - 2].last
+    row, column = last_to
+    (last_to[1] - from[1]).abs == 1 || (last_to[1] + from[1]).abs == 1
+  end
+
   def en_passant_performed?(from)
     return if @history.empty?
 
-    opponent_adjacent?(from) && last_move_pawn_twostep?
+    opponent_pawn_adjacent?(from) && last_move_pawn_twostep? && last_move_adjacent?(from)
   end
 end
