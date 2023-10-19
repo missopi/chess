@@ -121,8 +121,9 @@ class Chessboard
   end
 
   def remove_enpassant_capture(location)
+    piece = self[location]
     row, column = location
-    board[row + 1][column] = NoPiece.instance
+    piece.color == :white ? board[row + 1][column] = NoPiece.instance : board[row - 1][column] = NoPiece.instance
   end
 
   def update_game_record(from, to)
