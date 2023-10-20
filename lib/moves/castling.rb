@@ -2,15 +2,18 @@
 
 # Contains everything for castling move
 module Castling
-  # identify current player's rooks
-  def rook(color)
-    pieces.select { |piece| piece.color == color && piece.is_a?(Rook) }
+  # check king is in start position
+  def king_at_start?(from)
+    king = self[from]
+    king.is_a?(King)
+    king.color == :white && from == [7, 4] || king.color == :black && from == [0, 4]
   end
 
-  # check that at least one of the castles and the King are still in starting positions
-  # king cannot do if in check
-  # king cannot moves through check
-  # king cannot move into check
-  # king and castle swap places
-  # can only do once per game
+  # check rook is in start position
+  def rook_at_start?(to)
+    rook = self[to]
+    rook.is_a?(Rook)
+    rook.color == :white && (to == [7, 0] || to == [7, 7]) || 
+      rook.color == :black && (to == [0, 0] || to == [0, 7])
+  end
 end
