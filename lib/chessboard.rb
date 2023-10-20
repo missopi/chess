@@ -1,11 +1,11 @@
 # frozen_string_literal: true
 
 require_relative '../lib/pieces'
-require_relative '../lib/en_passant'
-require_relative '../lib/pawn_promotion'
-require_relative '../lib/check'
-require_relative '../lib/checkmate'
-require_relative '../lib/castling'
+require_relative '../lib/moves/en_passant'
+require_relative '../lib/moves/pawn_promotion'
+require_relative '../lib/moves/check'
+require_relative '../lib/moves/checkmate'
+require_relative '../lib/moves/castling'
 
 # class for creating chessboard
 class Chessboard
@@ -72,31 +72,6 @@ class Chessboard
   # method to isolate king's location
   def king(color)
     pieces.find { |piece| piece.color == color && piece.is_a?(King) }
-  end
-
-  # method for checking if the king of a certain color is in check
-  def check?(color)
-    king = king(color)
-    king_loc = king.location
-    pieces.reject { |piece| piece.color == color }.each do |piece|
-      return true if piece.valid_moves.include?(king_loc)
-    end
-    false
-  end
-
-  # method for checking if a certin king is in checkmate
-  def checkmate?(color)
-    return false unless check?(color) # must be in check
-
-    king_moves = king(color).valid_moves
-    moves = []
-    pieces.reject { |piece| piece.color == color }.each do |piece|
-      moves.push(piece.valid_moves)
-    end
-    moves.flatten!(1)
-    return true if (king_moves - moves).empty?
-
-    false
   end
 
   # method for stalemate - no possible moves for anyone
