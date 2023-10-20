@@ -2,8 +2,11 @@
 
 # Contains everything for castling move
 module Castling
-  # king identified in chessboard class
-  # identify current player's castles
+  # identify current player's rooks
+  def rook(color)
+    pieces.select { |piece| piece.color == color && piece.is_a?(Rook) }
+  end
+
   # check that at least one of the castles and the King are still in starting positions
   # king cannot do if in check
   # king cannot moves through check
