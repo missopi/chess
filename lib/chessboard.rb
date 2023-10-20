@@ -99,12 +99,21 @@ class Chessboard
 
   def update_board(from, to)
     remove_enpassant_capture(to) if en_passant_performed?(from)
+    castling_move(from, to) if castling_available?(from, to)
   end
 
   def remove_enpassant_capture(location)
     piece = self[location]
     row, column = location
     piece.color == :white ? board[row + 1][column] = NoPiece.instance : board[row - 1][column] = NoPiece.instance
+  end
+
+  def castling_move(from, to)
+    king = self[from]
+    rook = self[to]
+    self[from] = rook
+    self[to] = king
+    king.location = to
   end
 
   def update_game_record(from, to)
