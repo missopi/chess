@@ -3,11 +3,17 @@
 require_relative '../lib/pieces'
 require_relative '../lib/en_passant'
 require_relative '../lib/pawn_promotion'
+require_relative '../lib/check'
+require_relative '../lib/checkmate'
+require_relative '../lib/castling'
 
 # class for creating chessboard
 class Chessboard
   include EnPassant
   include PawnPromotion
+  include Check
+  include Checkmate
+  include Castling
   attr_reader :board, :history
 
   # pieces in starting positions on board
