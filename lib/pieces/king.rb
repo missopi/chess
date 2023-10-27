@@ -13,7 +13,8 @@ class King < Piece
         moves.push(current_loc) if opponent?(current_loc)
       end
     end
-    moves.push(castling) if board.king_at_start(location)
+    moves.push(king_castling) if board.king_at_start(location)
+    moves.push(queen_castling) if board.king_at_start(location)
     moves
   end
 
@@ -36,10 +37,11 @@ class King < Piece
   end
 
   # once per game king can move 2 spaces and place rook on space skipped over
-  def castling
-    [
-      [current_row, current_column - 2],
-      [current_row, current_column + 2]
-    ]
+  def queen_castling
+    [current_row, current_column - 2]
+  end
+
+  def king_castling
+    [current_row, current_column + 2]
   end
 end
