@@ -4,7 +4,19 @@ require_relative '../pieces/singlemovable'
 
 # subclass for king specific characteristics
 class King < Piece
-  include Singlemovable
+  def valid_moves
+    moves = []
+    possible_directions.each do |(dir_r, dir_c)|
+      current_loc = [current_row + dir_r, current_column + dir_c]
+      if board.valid_location?(current_loc)
+        moves.push(current_loc) if board.empty_space?(current_loc)
+        moves.push(current_loc) if opponent?(current_loc)
+      end
+    end
+    moves.push(kingside_castling) if board.king_at_start(location)
+    moves.push(queenside_castling) if board.king_at_start(location)
+    moves
+  end
 
   def possible_directions
     [
@@ -24,17 +36,12 @@ class King < Piece
     color == :white ? ' ♔ ' : ' ♚ '
   end
 
-  # finding out if any moves available whilst in check (otherwise becomes checkmate)
-  def check_moves
-    moves = []
-    valid_moves.each do |move|
-      test_board = board.duplicate
-      test_board.move_piece(location, move)
-      moves.push(move) unless board.check?(color)
-    end
-    moves
+  # once per game king can move 2 spaces and place rook on space skipped over
+  def queenside_castling
+    [current_row, current_column - 2]
   end
 
-  # once per game king can move 2 spaces and place rook on space skipped over
-  def castling(location) end
+  def kingside_castling
+    [current_row, current_column + 2]
+  end
 end
