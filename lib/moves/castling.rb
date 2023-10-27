@@ -42,16 +42,18 @@ module Castling
     king.location = to
   end
 
+  # king is on nearside of rook in comparison to queen
   def kingside_castling(to, rook)
     row, column = to
-    board[row][column - 1] = rook
-    board[row][column + 1] = NoPiece.instance
+    board[row][column - 1] = rook # move rook
+    board[row][column + 1] = NoPiece.instance # delete old rook
   end
 
+  # king is on farside of rook in comparison to queen
   def queenside_castling(to, rook)
     row, column = to
     board[row][column + 1] = rook
-    board[row][column + 2] = NoPiece.instance
+    board[row][column + 2] = NoPiece.instance 
   end
 
   def castling_switch(to, rook)
