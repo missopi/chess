@@ -41,4 +41,10 @@ module EnPassant
 
     opponent_pawn_adjacent?(from) && last_move_pawn_twostep? && last_move_adjacent?(from)
   end
+
+  def remove_enpassant_capture(location)
+    piece = self[location]
+    row, column = location
+    piece.color == :white ? board[row + 1][column] = NoPiece.instance : board[row - 1][column] = NoPiece.instance
+  end
 end

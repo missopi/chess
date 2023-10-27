@@ -101,12 +101,6 @@ class Chessboard
     remove_enpassant_capture(to) if en_passant_performed?(from)
   end
 
-  def remove_enpassant_capture(location)
-    piece = self[location]
-    row, column = location
-    piece.color == :white ? board[row + 1][column] = NoPiece.instance : board[row - 1][column] = NoPiece.instance
-  end
-
   def update_game_record(from, to)
     history << [from, to]
   end
