@@ -4,11 +4,9 @@
 module Castling
   # actual castling move
   def do_castling_move(from, to)
-    king = king_at_start(from)
+    king_at_start(from)
     rook = rooks(from, to)
-    move_king(from, to)
     castling_switch(to, rook)
-    remove_piece(from)
   end
 
   # check king is in start position
