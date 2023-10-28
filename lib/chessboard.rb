@@ -68,11 +68,7 @@ class Chessboard
   def pieces
     board.flatten.reject { |piece| piece == NoPiece.instance }
   end
-
-  def find_pieces(color)
-    pieces.select { |piece| piece.color == color }
-  end
-
+  
   # method to isolate king's location
   def king(color)
     pieces.find { |piece| piece.color == color && piece.is_a?(King) }
