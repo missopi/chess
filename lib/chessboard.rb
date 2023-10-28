@@ -87,11 +87,11 @@ class Chessboard
   def move_piece(from, to)
     piece = self[from]
     if piece.valid_moves.include?(to) && valid_location?(to)
-      remove_piece(from)
       self[to] = piece
       piece.location = to
-      update_game_record(from, to)
       update_board(from, to)
+      remove_piece(from)
+      update_game_record(from, to)
     else
       puts "Invalid move for this piece.\n"
     end
@@ -99,6 +99,7 @@ class Chessboard
 
   def update_board(from, to)
     remove_enpassant_capture(to) if en_passant_performed?(from)
+    do_castling_move(from, to)
   end
 
   def remove_piece(from)
