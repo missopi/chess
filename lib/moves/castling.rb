@@ -62,4 +62,20 @@ module Castling
       queenside_castling(to, rook)
     end
   end
+
+  def opponent_pieces(from)
+    king = self[from]
+    opponent_color = king.color == :white ? :black : :white
+    opponent_pieces = pieces.select { |piece| piece.color == opponent_color }
+    opponent_pieces
+  end
+
+  def safe_route?(from, to)
+  end
+
+  def route(from, to, route = [])
+  end
+
+  def castling_allowed?(to)
+  end
 end
