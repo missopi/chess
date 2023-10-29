@@ -63,6 +63,7 @@ module Castling
     end
   end
 
+  # All opponent pieces currently on board
   def opponent_pieces(from)
     king = self[from]
     opponent_color = king.color == :white ? :black : :white
@@ -70,6 +71,7 @@ module Castling
     opponent_pieces
   end
 
+  # All valid moves able to be taken by opponent pieces on board
   def opponent_valid_moves(from, to)
     opponent_valid_moves = []
     opponent_pieces = opponent_pieces(from)
@@ -77,12 +79,14 @@ module Castling
     opponent_valid_moves.flatten(1)
   end
 
+  # Is the move safe to do? No locations are reachable by opponent
   def safe_route?(from, to)
     opponents = opponent_valid_moves(from, to)
     route = route(from, to)
     return true if (opponents & route).empty?
   end
 
+  # Create array of route to be taken by king
   def route(from, to, route = [])
     route << from
 
