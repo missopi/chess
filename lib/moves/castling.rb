@@ -74,6 +74,22 @@ module Castling
   end
 
   def route(from, to, route = [])
+    route << from
+
+    queenside = from[0] == 7 ? :white_queenside : :black_queenside
+    kingside = from[0] == 7 ? :white_kingside : :black_kingside
+    direction = from[1] > to[1] ? queenside : kingside
+
+    route_coords = { 
+      white_queenside: [7, 3],
+      white_kingside: [7, 5],
+      black_queenside: [0, 3],
+      black_kingside: [0, 5]
+    }
+    
+    route << route_coords.fetch(direction) if route_coords.key?(direction)
+    route << to
+    route
   end
 
   def castling_allowed?(to)
