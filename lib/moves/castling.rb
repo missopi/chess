@@ -51,7 +51,7 @@ module Castling
   def queenside_castling(to, rook)
     row, column = to
     board[row][column + 1] = rook
-    board[row][column + 2] = NoPiece.instance 
+    board[row][column - 2] = NoPiece.instance 
   end
 
   def castling_switch(to, rook)
