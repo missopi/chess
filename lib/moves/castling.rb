@@ -70,7 +70,17 @@ module Castling
     opponent_pieces
   end
 
+  def opponent_valid_moves(from, to)
+    opponent_valid_moves = []
+    opponent_pieces = opponent_pieces(from)
+    opponent_pieces.each { |opponent| opponent_valid_moves.push(opponent.valid_moves)}
+    opponent_valid_moves.flatten(1)
+  end
+
   def safe_route?(from, to)
+    opponents = opponent_valid_moves(from, to)
+    route = route(from, to)
+    return true if (opponents & route).empty?
   end
 
   def route(from, to, route = [])
