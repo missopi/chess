@@ -4,7 +4,6 @@
 module Castling
   # actual castling move
   def do_castling_move(from, to)
-    king_at_start(from)
     rook = rooks(from, to)
     castling_switch(to, rook)
   end
@@ -14,6 +13,11 @@ module Castling
     king = self[from]
     king.is_a?(King)
     king.color == :white && from == [7, 4] || king.color == :black && from == [0, 4]
+  end
+
+  def rook_at_start(to)
+    start_positions = [[0, 0], [0, 7], [7, 0], [7, 7]]
+    start_positions.include?(to)
   end
 
   # find and identify chosen rook to do castling with
@@ -84,6 +88,8 @@ module Castling
     opponents = opponent_valid_moves(from, to)
     route = route(from, to)
     return true if (opponents & route).empty?
+
+    false
   end
 
   # Create array of route to be taken by king
@@ -106,6 +112,9 @@ module Castling
     route
   end
 
-  def castling_allowed?(to)
+  def castling_allowed?(from, to)
+    safe_route?(from, to)
+    king_at_start(from)
+    rook_at_start(to)
   end
 end
