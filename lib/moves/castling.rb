@@ -15,9 +15,9 @@ module Castling
     king.color == :white && from == [7, 4] || king.color == :black && from == [0, 4]
   end
 
-  def rook_at_start(to)
-    start_positions = [[0, 0], [0, 7], [7, 0], [7, 7]]
-    start_positions.include?(to)
+  def rook_at_start(from, to)
+    rook = rooks(from, to)
+    rook.location[1] == 0 || 7 ? true : false
   end
 
   # find and identify chosen rook to do castling with
@@ -76,7 +76,7 @@ module Castling
   end
 
   # All valid moves able to be taken by opponent pieces on board
-  def opponent_valid_moves(from, to)
+  def opponent_valid_moves(from)
     opponent_valid_moves = []
     opponent_pieces = opponent_pieces(from)
     opponent_pieces.each { |opponent| opponent_valid_moves.push(opponent.valid_moves)}
@@ -85,7 +85,7 @@ module Castling
 
   # Is the move safe to do? No locations are reachable by opponent
   def safe_route?(from, to)
-    opponents = opponent_valid_moves(from, to)
+    opponents = opponent_valid_moves(from)
     route = route(from, to)
     return true if (opponents & route).empty?
 
@@ -94,27 +94,24 @@ module Castling
 
   # Create array of route to be taken by king
   def route(from, to, route = [])
-    route << from
-
-    queenside = from[0] == 7 ? :white_queenside : :black_queenside
-    kingside = from[0] == 7 ? :white_kingside : :black_kingside
+    piece = self[from]
+    route << [from]
+    queenside = piece.color == :white ? :white_queenside : :black_queenside
+    kingside = piece.color == :white ? :white_kingside : :black_kingside
     direction = from[1] > to[1] ? queenside : kingside
 
     route_coords = { 
-      white_queenside: [7, 3],
-      white_kingside: [7, 5],
-      black_queenside: [0, 3],
-      black_kingside: [0, 5]
+      white_queenside: [[7, 3], [7, 2]],
+      white_kingside: [[7, 5], [7, 6]],
+      black_queenside: [[0, 3], [0, 2]],
+      black_kingside: [[0, 5], [0, 6]]
     }
     
     route << route_coords.fetch(direction) if route_coords.key?(direction)
-    route << to
-    route
+    route.flatten(1)
   end
 
   def castling_allowed?(from, to)
-    safe_route?(from, to)
-    king_at_start(from)
-    rook_at_start(to)
+    safe_route?(from, to) && king_at_start(from) && rook_at_start(from, to)
   end
 end
