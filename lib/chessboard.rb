@@ -86,7 +86,7 @@ class Chessboard
   # moving pieces from one location to another on the board
   def move_piece(from, to)
     piece = self[from]
-    if piece.valid_moves.include?(to) && valid_location?(to)
+    if piece.valid_moves.include?(to) && move_allowed?(from, to)
       self[to] = piece
       piece.location = to
       update_board(from, to)
@@ -97,9 +97,18 @@ class Chessboard
     end
   end
 
+  def move_allowed?(from, to)
+    piece = self[from]
+    if piece.is_a?(King)
+      valid_location?(to) && safe_route?(from, to)
+    else
+      valid_location?(to)
+    end
+  end
+
   def update_board(from, to)
     remove_enpassant_capture(to) if en_passant_performed?(from)
-    do_castling_move(from, to) # if ...
+    do_castling_move(from, to) if castling_allowed?(from, to)
   end
 
   def remove_piece(from)
