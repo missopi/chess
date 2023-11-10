@@ -1,1 +1,1 @@
-require_relative '../lib/piece'
+require_relative '../lib/pieces/piece'
