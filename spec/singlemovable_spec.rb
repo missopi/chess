@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative '../lib/pieces/singlemoveable'
+require_relative '../lib/pieces/singlemovable'
