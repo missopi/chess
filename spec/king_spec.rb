@@ -4,12 +4,21 @@ require_relative '../lib/pieces'
 
 describe King do
   describe '#to_s' do
-    subject(:king_string) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:king_white) { described_class.new(Chessboard.new, [0, 0], :white) }
 
     context 'When a white king is chosen' do
       it 'displays a white king icon on the board' do
-        king = king_string.to_s
+        king = king_white.to_s
         expect(king).to eq(' ♔ ')
+      end
+    end
+
+    subject(:king_black) { described_class.new(Chessboard.new, [0, 0], :black) }
+
+    context 'When a black king is chosen' do
+      it 'displays a black king icon on the board' do
+        king = king_black.to_s
+        expect(king).to eq(' ♚ ')
       end
     end
   end
