@@ -3,14 +3,6 @@
 require_relative '../lib/pieces/king'
 
 describe King do
-  describe '#valid_moves' do
-    subject(:king_valid) { described_class.new }
-  end
-
-  describe '#possible_directions' do
-    subject(:king_directions) { described_class.new }
-  end
-
   describe '#to_s' do
     subject(:king_string) { described_class.new(Chessboard.new, [0, 0], :white) }
 
