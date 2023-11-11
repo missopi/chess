@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/pieces/king'
+require_relative '../lib/pieces'
 
 describe King do
   describe '#to_s' do
