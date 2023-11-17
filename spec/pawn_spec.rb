@@ -37,7 +37,7 @@ describe Pawn do
   describe '#diagonal_left' do
     subject(:pawn_diag_left) { described_class.new(Chessboard.new, [4, 4], :black) }
 
-    context 'when the pawn can capture an opponent to the left' do
+    context 'when the black pawn can capture an opponent to the left' do
       it 'returns the correct coords' do
         diag_left = pawn_diag_left.diagonal_left
         expect(diag_left).to eq([5, 3])
@@ -47,6 +47,13 @@ describe Pawn do
 
   describe '#diagonal_right' do
     subject(:pawn_diag_right) { described_class.new(Chessboard.new, [4, 4], :white) }
+
+    context 'when the white pawn can capture an opponent to the right' do
+      it 'returns the correct coords' do
+        diag_right = pawn_diag_right.diagonal_right
+        expect(diag_right).to eq([3, 5])
+      end
+    end
   end
 
   describe '#en_passant_row?' do
