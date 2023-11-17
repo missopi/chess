@@ -77,11 +77,25 @@ describe Pawn do
   end
 
   describe '#left' do
-    subject(:pawn_left) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_left) { described_class.new(Chessboard.new, [4, 4], :white) }
+
+    context 'when checking for opponent to the left' do
+      it 'returns the correct column' do
+        left = pawn_left.left
+        expect(left).to eq([4, 3])
+      end
+    end
   end
 
   describe '#right' do
-    subject(:pawn_right) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_right) { described_class.new(Chessboard.new, [4, 4], :white) }
+
+    context 'when checking for opponent to the right' do
+      it 'returns the correct column' do
+        right = pawn_right.right
+        expect(right).to eq([4, 5])
+      end
+    end
   end
 
   describe '#first_move?' do
