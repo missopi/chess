@@ -20,4 +20,15 @@ describe Piece do
       expect(column).to eq(4)
     end
   end
+
+  describe '#opponent' do
+    subject(:piece) {described_class.new(Chessboard.new, [0, 0], :white) }
+
+    context 'when no opponent is at the chosen location' do
+      it 'returns false' do
+        opponent = piece.opponent?([0, 1])
+        expect(opponent).to be false
+      end
+    end
+  end
 end
