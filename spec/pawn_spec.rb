@@ -3,6 +3,58 @@
 require_relative '../lib/pieces'
 
 describe Pawn do
+  describe '#one_step' do
+    subject(:black_one) { described_class.new(Chessboard.new, [1, 3], :black) }
+
+    context 'When the black pawn moves one step' do
+      it 'returns one row higher' do
+        one_step = black_one.one_step
+        expect(one_step).to eq([2, 3])
+      end
+    end
+
+    subject(:white_one) { described_class.new(Chessboard.new, [1, 3], :white) }
+
+    context 'When the white pawn moves one step' do
+      it 'returns one row lower' do
+        one_step = white_one.one_step
+        expect(one_step).to eq([0, 3])
+      end
+    end
+  end
+
+  describe '#two_step' do
+    subject(:pawn_two) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#diagonal_left' do
+    subject(:pawn_diag_left) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#diagonal_right' do
+    subject(:pawn_diag_right) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#en_passant_row?' do
+    subject(:pawn_en_passant) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#left' do
+    subject(:pawn_left) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#right' do
+    subject(:pawn_right) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
+  describe '#first_move?' do
+    subject(:pawn_first) { described_class.new(Chessboard.new, [6, 0], :white) }
+  end
+
+  describe '#forward' do
+    subject(:pawn_forward) { described_class.new(Chessboard.new, [0, 0], :white) }
+  end
+
   describe '#to_s' do
     subject(:pawn_white) { described_class.new(Chessboard.new, [0, 0], :white) }
 
@@ -21,5 +73,9 @@ describe Pawn do
         expect(pawn).to eq(' ♟ ')
       end
     end
+  end
+
+  describe '#promotion?' do
+    subject(:pawn_promotion) { described_class.new(Chessboard.new, [0, 0], :white) }
   end
 end
