@@ -57,7 +57,23 @@ describe Pawn do
   end
 
   describe '#en_passant_row?' do
-    subject(:pawn_en_passant) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_en_passant) { described_class.new(Chessboard.new, [3, 0], :white) }
+
+    context 'when pawn is on correct row for en_passant' do
+      it 'returns true' do
+        en_passant = pawn_en_passant.en_passant_row?
+        expect(en_passant).to be true
+      end
+    end
+
+    subject(:pawn_not_passant) { described_class.new(Chessboard.new, [3, 0], :black) }
+
+    context 'when pawn is not on the correct row for en_passant' do
+      it 'returns false' do
+        en_passant = pawn_not_passant.en_passant_row?
+        expect(en_passant).to be false
+      end
+    end
   end
 
   describe '#left' do
