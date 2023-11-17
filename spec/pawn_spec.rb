@@ -110,7 +110,23 @@ describe Pawn do
   end
 
   describe '#forward' do
-    subject(:pawn_forward) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:white_forward) { described_class.new(Chessboard.new, [0, 0], :white) }
+
+    context 'when added to white pawn coords' do
+      it 'returns -1' do
+        forward = white_forward.forward
+        expect(forward).to eq(-1)
+      end
+    end
+
+    subject(:black_forward) { described_class.new(Chessboard.new, [0, 0], :black) }
+
+    context 'when added to black pawn coords' do
+      it 'returns 1' do
+        forward = black_forward.forward
+        expect(forward).to eq(1)
+      end
+    end
   end
 
   describe '#to_s' do
