@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/pieces'
+require_relative '../../lib/pieces'
 
 describe Pawn do
   describe '#one_step' do

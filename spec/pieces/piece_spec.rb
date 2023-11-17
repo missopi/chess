@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative '../lib/pieces'
+require_relative '../../lib/pieces'
 
 describe Piece do
   describe '#current_row' do
