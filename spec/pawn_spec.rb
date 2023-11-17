@@ -151,5 +151,21 @@ describe Pawn do
 
   describe '#promotion?' do
     subject(:pawn_promotion) { described_class.new(Chessboard.new, [0, 0], :white) }
+
+    context 'when a pawn in on the promotion row' do
+      it 'returns true' do
+        promo = pawn_promotion.promotion?
+        expect(promo).to be true
+      end
+    end
+
+    subject(:pawn_no_promotion) { described_class.new(Chessboard.new, [3, 0], :black) }
+
+    context 'when a pawn is not on the promotion row' do
+      it 'returns false' do
+        promo = pawn_no_promotion.promotion?
+        expect(promo).to be false
+      end
+    end
   end
 end
