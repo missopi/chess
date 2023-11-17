@@ -6,7 +6,7 @@ describe Pawn do
   describe '#one_step' do
     subject(:black_one) { described_class.new(Chessboard.new, [1, 3], :black) }
 
-    context 'When the black pawn moves one step' do
+    context 'When the black pawn can move one step' do
       it 'returns one row higher' do
         one_step = black_one.one_step
         expect(one_step).to eq([2, 3])
@@ -15,7 +15,7 @@ describe Pawn do
 
     subject(:white_one) { described_class.new(Chessboard.new, [1, 3], :white) }
 
-    context 'When the white pawn moves one step' do
+    context 'When the white pawn can move one step' do
       it 'returns one row lower' do
         one_step = white_one.one_step
         expect(one_step).to eq([0, 3])
@@ -26,7 +26,7 @@ describe Pawn do
   describe '#two_step' do
     subject(:pawn_two) { described_class.new(Chessboard.new, [4, 4], :white) }
 
-    context 'when the pawn takes two steps' do
+    context 'when the pawn can take two steps' do
       it 'returns the correct row to kove to' do
         two_step = pawn_two.two_step
         expect(two_step).to eq([2, 4])
@@ -35,11 +35,18 @@ describe Pawn do
   end
 
   describe '#diagonal_left' do
-    subject(:pawn_diag_left) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_diag_left) { described_class.new(Chessboard.new, [4, 4], :black) }
+
+    context 'when the pawn can capture an opponent to the left' do
+      it 'returns the correct coords' do
+        diag_left = pawn_diag_left.diagonal_left
+        expect(diag_left).to eq([5, 3])
+      end
+    end
   end
 
   describe '#diagonal_right' do
-    subject(:pawn_diag_right) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_diag_right) { described_class.new(Chessboard.new, [4, 4], :white) }
   end
 
   describe '#en_passant_row?' do
