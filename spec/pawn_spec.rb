@@ -24,7 +24,14 @@ describe Pawn do
   end
 
   describe '#two_step' do
-    subject(:pawn_two) { described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:pawn_two) { described_class.new(Chessboard.new, [4, 4], :white) }
+
+    context 'when the pawn takes two steps' do
+      it 'returns the correct row to kove to' do
+        two_step = pawn_two.two_step
+        expect(two_step).to eq([2, 4])
+      end
+    end
   end
 
   describe '#diagonal_left' do
