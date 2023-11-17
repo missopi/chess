@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative '../lib/moves/checkmate'
+require_relative '../../lib/moves'

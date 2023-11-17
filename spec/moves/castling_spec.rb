@@ -1,3 +1,3 @@
 # frozen_string_literal: true
 
-require_relative '../lib/moves/castling'
+require_relative '../../lib/moves'
