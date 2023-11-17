@@ -99,7 +99,14 @@ describe Pawn do
   end
 
   describe '#first_move?' do
-    subject(:pawn_first) { described_class.new(Chessboard.new, [6, 0], :white) }
+    subject(:pawn_first) { described_class.new(Chessboard.new, [1, 0], :black) }
+
+    context 'When confirming the pawn is on the correct row for its first move' do
+      it 'returns true' do
+        first = pawn_first.first_move?
+        expect(first).to be true
+      end
+    end
   end
 
   describe '#forward' do
