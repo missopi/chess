@@ -5,7 +5,7 @@ module PawnPromotion
   def pawn_promotion(location)
     pawn = self[location]
     return unless pawn.is_a?(Pawn)
-    return unless pawn.promotion_row == true
+    return unless pawn.promotion? == true
 
     loop do
       puts 'Which piece do you want to promote your pawn to?'
