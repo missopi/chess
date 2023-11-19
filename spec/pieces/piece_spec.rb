@@ -22,12 +22,16 @@ describe Piece do
   end
 
   describe '#opponent' do
-    subject(:piece) {described_class.new(Chessboard.new, [0, 0], :white) }
+    subject(:piece) { described_class.new(board, [0, 0], :white) }
+    subject(:board) { Chessboard.new }
 
-    context 'when no opponent is at the chosen location' do
-      it 'returns false' do
-        opponent = piece.opponent?([0, 1])
-        expect(opponent).to be false
+    context 'when an opponent piece is at the chosen location' do
+      before do
+        allow(board[[3, 3]] = Pawn.new(board, [3, 3], :black))
+      end
+      it 'returns true' do
+        opponent = piece.opponent?([3, 3])
+        expect(opponent).to be true
       end
     end
   end
