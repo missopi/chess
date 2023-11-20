@@ -65,6 +65,15 @@ describe Chessboard do
     end
   end
 
+  describe '#empty_space' do
+    context 'A space with NoPiece on it' do
+      it 'will be an empty space' do
+        location = test_board[[4, 4]]
+        expect(location).to eq(NoPiece.instance)
+      end
+    end
+  end
+
   describe '#valid_location' do
     context 'A location out of bounds' do
       it 'returns false' do
