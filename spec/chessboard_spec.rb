@@ -91,4 +91,15 @@ describe Chessboard do
       end
     end
   end
+
+  describe '#pieces' do
+    context 'a list of the boards pieces' do
+      subject(:test_pieces) { described_class.start_chess }
+
+      it 'should not include NoPieces' do
+        pieces_list = test_pieces.pieces
+        expect(pieces_list).to_not include(NoPiece.instance)
+      end
+    end
+  end
 end
