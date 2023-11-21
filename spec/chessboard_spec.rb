@@ -108,6 +108,19 @@ describe Chessboard do
     end
   end
 
+  describe '#move_allowed' do
+    context 'when a move is to a valid location' do
+      before do
+        allow(test_board[[1, 0]] = Pawn.new(test_board, [0, 0], :black))
+      end
+
+      it 'returns true' do
+        move = test_board.move_allowed?([1, 0], [2, 0])
+        expect(move).to be true
+      end
+    end
+  end
+
   describe '#remove_piece' do
     context 'when a piece is removed from a space' do
       before do
