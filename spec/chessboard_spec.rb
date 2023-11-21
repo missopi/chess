@@ -107,4 +107,17 @@ describe Chessboard do
       end
     end
   end
+
+  describe '#remove_piece' do
+    context 'when a piece is removed from a space' do
+      before do
+        allow(test_board[[0, 0]] = Pawn.new(test_board, [0, 0], :black))
+      end
+
+      it 'contains NoPiece' do
+        test_board.remove_piece([0, 0])
+        expect(test_board[[0, 0]]).to eq(NoPiece.instance)
+      end
+    end
+  end
 end
