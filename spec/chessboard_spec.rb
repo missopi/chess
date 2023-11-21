@@ -100,6 +100,11 @@ describe Chessboard do
         pieces_list = test_pieces.pieces
         expect(pieces_list).to_not include(NoPiece.instance)
       end
+
+      it 'should include Queens' do
+        pieces_list = test_pieces.pieces
+        expect(pieces_list).to include(Queen)
+      end
     end
   end
 end
