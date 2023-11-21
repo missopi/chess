@@ -26,7 +26,14 @@ describe Game do
   end
 
   describe '#assign_current_player' do
+    it 'assigns player_one on turn 1' do
+      player = test_game.assign_current_player(1)
+      expect(player).to eq(@player_one)
+    end
+
+    it 'assigns player_two on turn 20' do
+      player = test_game.assign_current_player(20)
+      expect(player).to eq(@player_two)
+    end
   end
-
-
 end
