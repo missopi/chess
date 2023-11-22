@@ -3,7 +3,7 @@
 require_relative '../../lib/moves'
 
 describe Castling do
-  let(:test_board) { Chessboard.new }
+  subject(:test_board) { Chessboard.new }
 
   before do
     allow(test_board[[7, 4]] = King.new(test_board, [7, 4], :white))
@@ -18,6 +18,15 @@ describe Castling do
         expect(result). to be true
       end
     end
+  end
+
+  describe '#move_king' do
+    context 'when a king moves' do
+      it 'it moves on the board to the target position' do
+        test_board.move_king([7, 4], [7, 6])
+        expect(test_board[[7, 6]]).to be_a(King)
+      end
+    end      
   end
 
 end
