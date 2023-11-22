@@ -40,5 +40,26 @@ describe Castling do
     end
   end
 
+  describe '#kingside_castling' do
+    context 'after the king moves' do
+      it 'moves the rook to its new position' do
+        rook = Rook.new(test_board, [7, 7], :white)
+        to = [7, 6]
+        test_board.kingside_castling(to, rook)
+        expect(test_board[[7, 5]]).to be_a(Rook)
+      end
+    end
+  end
+
+  describe '#queenside_castling' do
+    context 'after the king moves' do
+      it 'deletes the rook from its old position' do
+        rook = Rook.new(test_board, [7, 0], :white)
+        to = [7, 2]
+        test_board.queenside_castling(to, rook)
+        expect(test_board[[7, 0]]).to eq(NoPiece.instance)
+      end
+    end
+  end
 end
 
