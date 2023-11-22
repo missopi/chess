@@ -61,5 +61,12 @@ describe Castling do
       end
     end
   end
+
+  describe '#route' do
+    it 'returns the castling route taken by the king' do
+      route = test_board.route([7, 4], [7, 6])
+      expect(route).to eq([[7, 4], [7, 5], [7, 6]])
+    end
+  end
 end
 
