@@ -31,4 +31,24 @@ describe EnPassant do
       end
     end
   end
+
+  describe '#opponent_pawn_adjacent?' do
+    context 'when an opponent pawn is on either side' do
+      before do
+        allow(test_board[[4, 3]] = Pawn.new(test_board, [4, 3], :black))
+      end
+
+      it 'returns true' do
+        result = test_board.opponent_pawn_adjacent?([4, 4])
+        expect(result).to be true
+      end
+    end
+
+    context 'when no opponent pawns are adjacent' do
+      it 'returns false' do
+        result = test_board.opponent_pawn_adjacent?([4, 4])
+        expect(result).to be false
+      end
+    end
+  end
 end
