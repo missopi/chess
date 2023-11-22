@@ -16,8 +16,6 @@ describe Check do
     context 'if the king is in check' do
       before do
         allow(test_board[[0, 2]] = Rook.new(test_board, [0, 2], :black))
-        allow(test_board[[2, 2]] = Queen.new(test_board, [2, 2], :black))
-        allow(test_board[[2, 0]] = Rook.new(test_board, [2, 0], :black))
       end
 
       it 'returns true' do
