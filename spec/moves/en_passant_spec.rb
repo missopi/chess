@@ -51,4 +51,18 @@ describe EnPassant do
       end
     end
   end
+
+  describe '#remove_enpassant_capture' do
+    context 'after en_passant is performed' do
+      before do
+        allow(test_board[[3, 3]] = Pawn.new(test_board, [3, 3], :white))
+        allow(test_board[[4, 3]] = Pawn.new(test_board, [4, 3], :black))
+      end
+
+      it 'removes opponent piece from the board' do
+        result = test_board.remove_enpassant_capture([3, 3])
+        expect(test_board[[4, 3]]).to eq(NoPiece.instance)
+      end
+    end
+  end
 end
