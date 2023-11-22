@@ -31,5 +31,14 @@ describe Castling do
     end      
   end
 
+  describe '#rook_at_start' do
+    context 'when there is a rook in the start position' do
+      it 'returns true' do
+        result = test_board.rook_at_start([7, 4], [7, 6])
+        expect(result).to be true
+      end
+    end
+  end
+
 end
 
