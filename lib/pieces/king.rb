@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../pieces/singlemovable'
-
 # subclass for king specific characteristics
 class King < Piece
   def valid_moves
