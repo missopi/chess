@@ -32,20 +32,20 @@ describe King do
 
   subject(:castling) { described_class.new(Chessboard.new, [0, 4], :white) }
 
-  describe '#queen_castling' do
-    context 'When doing a queenside castling' do
-      it 'King moves two spaces left' do
-        king_loc = castling.queen_castling
-        expect(king_loc).to eq([0, 2])
+  describe 'castling_directions' do
+    context 'When doing a castling' do
+      it 'King moves either two spaces left or two steps right' do
+        king_loc = castling.castling_directions
+        expect(king_loc).to eq([[0, -2], [0, 2]])
       end
     end
   end
 
-  describe '#king_castling' do
-    context 'When doing a queenside castling' do
-      it 'King moves two spaces right' do
-        king_loc = castling.king_castling
-        expect(king_loc).to eq([0, 6])
+  describe '#king_castle_space' do
+    context 'When doing a kingside castling' do
+      it 'the space the castle moves to is one step right' do
+        king_loc = castling.king_castle_space
+        expect(king_loc).to eq([0, 5])
       end
     end
   end
