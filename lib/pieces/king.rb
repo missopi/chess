@@ -11,7 +11,7 @@ class King < Piece
         moves.push(move_loc) if opponent?(move_loc)
       end
     end
-    moves << castling_moves
+    moves << castling_moves unless castling_moves.empty?
     moves
   end
 
