@@ -11,8 +11,10 @@ class King < Piece
         moves.push(current_loc) if opponent?(current_loc)
       end
     end
-    moves.push(king_castling) if board.king_at_start(location)
-    moves.push(queen_castling) if board.king_at_start(location)
+    if board.king_at_start(location)
+      moves.push(king_castling) if board.empty_space?(king_castling) && board.empty_space?(king_castle_space)
+      moves.push(queen_castling) if board.empty_space?(queen_castling) && board.empty_space?(queen_castle_space)
+    end
     moves
   end
 
@@ -41,5 +43,13 @@ class King < Piece
 
   def king_castling
     [current_row, current_column + 2]
+  end
+
+  def queen_castle_space
+    [current_row, current_column - 1]
+  end
+
+  def king_castle_space
+    [current_row, current_column + 1]
   end
 end
