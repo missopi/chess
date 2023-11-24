@@ -5,17 +5,34 @@ class King < Piece
   def valid_moves
     moves = []
     possible_directions.each do |(dir_r, dir_c)|
-      current_loc = [current_row + dir_r, current_column + dir_c]
-      if board.valid_location?(current_loc)
-        moves.push(current_loc) if board.empty_space?(current_loc)
-        moves.push(current_loc) if opponent?(current_loc)
+      move_loc = [current_row + dir_r, current_column + dir_c]
+      if board.valid_location?(move_loc)
+        moves.push(move_loc) if board.empty_space?(move_loc)
+        moves.push(move_loc) if opponent?(move_loc)
       end
     end
-    if board.king_at_start(location)
-      moves.push(king_castling) if board.empty_space?(king_castling) && board.empty_space?(king_castle_space)
-      moves.push(queen_castling) if board.empty_space?(queen_castling) && board.empty_space?(queen_castle_space)
-    end
+    moves << castling_moves
     moves
+  end
+
+  def castling_moves
+    castling_moves = []
+    castling_directions.each do |(dir_r, dir_c)|
+      current_loc = [current_row, current_column]
+      move_loc = [current_row + dir_r, current_column + dir_c]
+      if board.king_at_start(current_loc)
+        castling_moves.push(move_loc) if board.empty_space?(move_loc) && board.empty_space?(king_castle_space)
+        castling_moves.push(move_loc) if board.empty_space?(move_loc) && board.empty_space?(queen_castle_space)
+      end
+    end
+    castling_moves.flatten(1)
+  end
+
+  def castling_directions
+    [
+      [0, -2],
+      [0, 2]
+    ]
   end
 
   def possible_directions
@@ -34,15 +51,6 @@ class King < Piece
   # print icon of piece
   def to_s
     color == :white ? ' ♔ ' : ' ♚ '
-  end
-
-  # once per game king can move 2 spaces and place rook on space skipped over
-  def queen_castling
-    [current_row, current_column - 2]
-  end
-
-  def king_castling
-    [current_row, current_column + 2]
   end
 
   def queen_castle_space
