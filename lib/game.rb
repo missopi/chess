@@ -46,13 +46,11 @@ class Game
     @player_two = create_player(2)
     loop do
       current_player = assign_current_player(@turn)
+      other_player = assign_current_player(@turn - 1)
+      break if game_over?(current_player, other_player)
+
       player_turn(current_player)
       @turn += 1
-      if game_over?(current_player)
-        @turn += 1
-        puts "\n Game over. #{current_player.name} is the winner!"
-        break
-      end
     end
   end
 
@@ -93,7 +91,15 @@ class Game
     end
   end
 
-  def game_over?(player)
-    board.checkmate?(player.color) || board.stalemate?
+  def game_over?(current_player, other_player)
+    if board.checkmate?(current_player.color)
+      puts "Game Over. #{other_player.name} wins!"
+      return true
+    end
+
+    if board.stalemate?
+      puts "It's a draw."
+      return true
+    end
   end
 end
