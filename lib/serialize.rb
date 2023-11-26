@@ -4,8 +4,11 @@
 class Serialize
   def create_filename
   end
-  
-  def save_game 
+
+  def save_game
+    Dir.mkdir('saved_games') unless Dir.exist?('saved_games')
+
+    
   end
 
   def load_game
