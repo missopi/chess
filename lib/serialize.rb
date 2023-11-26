@@ -17,10 +17,18 @@ class Serialize
   end
 
   def load_game
-    puts "No saves found.\n" unless saved_games?
+    puts "No saves found.\n" unless saved_games_exist?
+
+    puts "Saved games:\n\n"
+    saved_games.each { |game| puts game }
   end
 
-  def saved_games?
+  def saved_games
+    DIR.entries('saved_games/')
+       .map { |file| File.basename(file, '.yaml') }
+  end
+
+  def saved_games_exist?
     return false if !Dir.exist?('/saved_games') || Dir.empty?('/save_games')
 
     true
