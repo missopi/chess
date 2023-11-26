@@ -17,9 +17,13 @@ class Serialize
   end
 
   def load_game
+    puts "No saves found.\n" unless saved_games?
   end
 
-  def saved_games
+  def saved_games?
+    return false if !Dir.exist?('/saved_games') || Dir.empty?('/save_games')
+
+    true
   end
 
   def display_saved_games
