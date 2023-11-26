@@ -8,7 +8,7 @@ class Serialize
     puts 'Enter a name for your saved game.'
     name = gets.chomp
     while file_exists?(name)
-      return name if overwrite?(name)
+      return name if overwrite?
 
       name = gets.chomp
     end
@@ -19,8 +19,15 @@ class Serialize
     File.exist?(File.join(Dir.pwd, "/saved_games/#{filename}.yaml"))
   end
 
-  def overwrite?(filename)
-    
+  def overwrite?
+    puts 'Do you want to overwrite the file? (Y/N)'
+    answer = gets[0].upcase
+    until %w[Y N].include? answer
+      puts 'Invalid choice. Do you want to overwrite the file? (Y/N)'
+      answer = gets[0].upcase
+    end
+
+    true if answer == 'Y'
   end
 
   def save_game(current_game)
