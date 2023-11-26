@@ -19,8 +19,7 @@ class Serialize
   def load_game
     puts "No saves found.\n" unless saved_games_exist?
 
-    puts "Saved games:\n\n"
-    saved_games.each { |game| puts game }
+    display_saved_games
   end
 
   def saved_games
@@ -35,6 +34,8 @@ class Serialize
   end
 
   def display_saved_games
+    puts "Saved games:\n\n"
+    saved_games.each { |game| puts game }
   end
 
   def choose_game_to_load
