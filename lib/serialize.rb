@@ -5,6 +5,22 @@ require 'yaml'
 # class that handles everything to do with saving and loading the game
 class Serialize
   def create_filename
+    puts 'Enter a name for your saved game.'
+    name = gets.chomp
+    while file_exists?(name)
+      return name if overwrite?(name)
+
+      name = gets.chomp
+    end
+    name
+  end
+
+  def file_exists?(filename)
+    File.exist?(File.join(Dir.pwd, "/saved_games/#{filename}.yaml"))
+  end
+
+  def overwrite?(filename)
+    
   end
 
   def save_game(current_game)
@@ -20,6 +36,8 @@ class Serialize
     puts "No saves found.\n" unless saved_games_exist?
 
     display_saved_games
+    filename = choose_game_to_load
+    YAML.safe_load(File.read("./saved_games/#{filename}.yaml"))
   end
 
   def saved_games
@@ -39,6 +57,7 @@ class Serialize
   end
 
   def choose_game_to_load
+
   end
 
   def resume_game
