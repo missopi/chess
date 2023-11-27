@@ -40,7 +40,7 @@ class Serialize
   end
 
   def load_game
-    puts "No saves found.\n" unless saved_games_exist?
+    puts "No saves found.\n"  unless saved_games_exist?
 
     display_saved_games
     filename = choose_game_to_load
@@ -65,8 +65,5 @@ class Serialize
 
   def choose_game_to_load
 
-  end
-
-  def resume_game
   end
 end
