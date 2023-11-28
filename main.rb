@@ -10,8 +10,13 @@ cb = Chessboard.start_chess
 
 def play_again?
   puts 'Do you want to play again? (Y/N)'
-  answer = gets.chomp.upcase
-  return answer == 'Y'
+	answer = gets.chomp.upcase
+  until %w[Y N].include? answer
+		puts 'Invalid choice. Do you want to play again? (Y/N)'
+		answer = gets[0].upcase
+	end
+
+	true if answer == 'Y'
 end
 
 loop do
@@ -21,5 +26,3 @@ loop do
 		break
 	end
 end
-
-
