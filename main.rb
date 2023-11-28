@@ -7,5 +7,19 @@ require_relative 'lib/game'
 require_relative 'lib/player'
 
 cb = Chessboard.start_chess
-g = Game.new(cb, RenderBoard)
-g.play
+
+def play_again?
+  puts 'Do you want to play again? (Y/N)'
+  answer = gets.chomp.upcase
+  return answer == 'Y'
+end
+
+loop do
+  Game.new(cb, RenderBoard).play
+	unless play_again?
+		puts 'Goodbye'
+		break
+	end
+end
+
+
