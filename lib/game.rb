@@ -4,9 +4,14 @@ require_relative '../lib/chessboard'
 require_relative '../lib/pieces'
 require_relative '../lib/player'
 require_relative '../lib/render_board'
+require_relative '../lib/serialize'
 
 # class for the chess gameplay
 class Game
+  include Serialize
+
+  OPTIONS = %w[help save quit].freeze
+
   attr_reader :board, :color, :board_render
   attr_accessor :name
 
@@ -24,6 +29,9 @@ class Game
     puts 'Instructions for how to play chess can be found at'
     puts 'https://en.wikipedia.org/wiki/Chess.'
     puts "\n"
+    puts "Do you wish to load a game you've already started? (Y/N)"
+    input = gets.chomp.upcase
+    load_game if input == 'Y'
   end
 
   # Get players name and assign color
@@ -39,6 +47,25 @@ class Game
     turn.odd? ? @player_one : @player_two
   end
 
+  # Additional option choices
+  def choose_option
+    puts "Choose either 'save', 'help' or 'quit'.  To exit choices type 'N'."
+    input = gets.chomp
+    if input == 'help'
+      puts 'Instructions for how to play chess can be found at'
+      puts 'https://en.wikipedia.org/wiki/Chess.'
+      puts "Do you wish to 'save' or 'quit'? To exit choices type 'N'."
+    elsif input == 'save'
+      save_game(self)
+    elsif input == 'quit'
+      board_render.render
+    elsif input == 'N'
+      return
+    else
+      puts 'Invalid choice.'
+    end
+  end
+      
   # Actual game play
   def play
     instructions
@@ -71,10 +98,15 @@ class Game
 
   # Choosing which piece to move on board
   def player_input_from(player)
-    puts "\nChoose a #{player.color} piece to move: "
+    puts "\nChoose a #{player.color} piece to move or type 'O' for options: "
     loop do
       from = player.input_position
       return from if board[from].color == player.color
+         
+      if from == 'O'
+        choose_option
+        player_input_from(player)
+      end
 
       puts 'Invalid choice.'
     end

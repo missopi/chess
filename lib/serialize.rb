@@ -40,7 +40,7 @@ class Serialize
   end
 
   def load_game
-    puts "No saves found.\n"  unless saved_games_exist?
+    puts "No saves found.\n" unless saved_games_exist?
 
     display_saved_games
     filename = choose_game_to_load
@@ -64,6 +64,18 @@ class Serialize
   end
 
   def choose_game_to_load
+    puts "Please choose which game you'd like to load or 'exit' menu: "
+    filenames = Dir.glob('saved_games/*')
+    puts filenames
 
+    input = gets.chomp.downcase
+    return if input == 'exit'
+
+    filename = filenames.find { |f| f.match?(/^#{Regexp.quote(input)}/) }.dup
+
+    unless filename
+      puts "#{filename} does not exist"
+      choose_game_to_load
+    end
   end
 end
