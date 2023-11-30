@@ -73,7 +73,7 @@ class Serialize
 
     filename = filenames.find { |f| f.match?(/^#{Regexp.quote(input)}/) }.dup
 
-    unless filename
+    until filename
       puts "#{filename} does not exist"
       choose_game_to_load
     end
