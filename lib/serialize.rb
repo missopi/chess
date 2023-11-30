@@ -48,7 +48,7 @@ module Serialize
   end
 
   def saved_games
-    DIR.entries('saved_games/')
+    Dir.entries('saved_games/')
        .map { |file| File.basename(file, '.yaml') }
   end
 
