@@ -8,21 +8,4 @@ require_relative 'lib/player'
 
 cb = Chessboard.start_chess
 
-def play_again?
-  puts 'Do you want to play again? (Y/N)'
-  answer = gets.chomp.upcase
-  until %w[Y N].include? answer
-    puts 'Invalid choice. Do you want to play again? (Y/N)'
-    answer = gets[0].upcase
-  end
-
-  true if answer == 'Y'
-end
-
-loop do
-  Game.new(cb, RenderBoard).play
-  unless play_again?
-    puts 'Goodbye'
-    break
-  end
-end
+Game.new(cb, RenderBoard).play
