@@ -2,8 +2,8 @@
 
 require 'yaml'
 
-# class that handles everything to do with saving and loading the game
-class Serialize
+# handles everything to do with saving and loading the game
+module Serialize
   def create_filename
     puts 'Enter a name for your saved game.'
     name = gets.chomp
