@@ -5,10 +5,12 @@ require_relative '../lib/pieces'
 require_relative '../lib/player'
 require_relative '../lib/render_board'
 require_relative '../lib/serialize'
+require_relative '../lib/input'
 
 # class for the chess gameplay
 class Game
   include Serialize
+  include Input
 
   OPTIONS = %w[help save quit].freeze
 
@@ -47,37 +49,17 @@ class Game
     turn.odd? ? @player_one : @player_two
   end
 
-  # Additional option choices
-  def choose_option
-    puts "Choose either 'save', 'help' or 'quit'.  To exit choices type 'N'."
-    input = gets.chomp
-    case input
-    when 'help'
-      puts 'Instructions for how to play chess can be found at'
-      puts 'https://en.wikipedia.org/wiki/Chess.'
-      puts "Do you wish to 'save' or 'quit'? To exit choices type 'N'."
-    when 'save'
-      save_game(self)
-    when 'quit'
-      board_render.render
-    when 'N'
-      return
-    else
-      puts 'Invalid choice.'
-    end
-  end
-
   # Actual game play
   def play
     instructions
     @player_one = create_player(1)
     @player_two = create_player(2)
     loop do
-      current_player = assign_current_player(@turn)
+      @current_player = assign_current_player(@turn)
       other_player = assign_current_player(@turn - 1)
-      break if game_over?(current_player, other_player)
+      break if game_over?(@current_player, other_player)
 
-      player_turn(current_player)
+      player_turn(@current_player)
       @turn += 1
     end
   end
@@ -101,13 +83,8 @@ class Game
   def player_input_from(player)
     puts "\nChoose a #{player.color} piece to move or type 'O' for options: "
     loop do
-      from = player.input_position
+      from = input_position
       return from if board[from].color == player.color
-         
-      if from == 'O'
-        choose_option
-        player_input_from(player)
-      end
 
       puts 'Invalid choice.'
     end
@@ -117,7 +94,7 @@ class Game
   def player_input_to(player)
     puts 'Choose a position to move to: '
     loop do
-      to = player.input_position
+      to = input_position
       return to if board.valid_location?(to)
 
       puts 'Location chosen not on board.'
