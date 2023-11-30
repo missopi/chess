@@ -30,10 +30,11 @@ class Game
     puts "\n"
     puts 'Instructions for how to play chess can be found at'
     puts 'https://en.wikipedia.org/wiki/Chess.'
-    puts "\n"
     puts "Do you wish to load a game you've already started? (Y/N)"
     input = gets.chomp.upcase
+    puts "Invalid choice. Do you wish to load a game you've already started? (Y/N)" until %w[Y N].include? input
     load_game if input == 'Y'
+    puts "\n"
   end
 
   # Get players name and assign color
@@ -71,12 +72,11 @@ class Game
     loop do
       board_render.render
       from_pos = player_input_from(player)
-      to_pos = player_input_to(player)
+      to_pos = player_input_to
       move = board.move_piece(from_pos, to_pos)
       board.pawn_promotion(to_pos) unless move.nil?
       return move unless move.nil?
     end
-    board_render.render
   end
 
   # Choosing which piece to move on board
@@ -91,7 +91,7 @@ class Game
   end
 
   # Choosing where to put each piece
-  def player_input_to(player)
+  def player_input_to
     puts 'Choose a position to move to: '
     loop do
       to = input_position
@@ -104,12 +104,12 @@ class Game
   def game_over?(current_player, other_player)
     if board.checkmate?(current_player.color)
       puts "Game Over. #{other_player.name} wins!"
-      return true
+      exit
     end
 
-    if board.stalemate?
-      puts "It's a draw."
-      return true
-    end
+    return unless board.stalemate?
+
+    puts "It's a draw."
+    exit
   end
 end
