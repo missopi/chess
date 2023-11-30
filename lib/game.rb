@@ -51,21 +51,22 @@ class Game
   def choose_option
     puts "Choose either 'save', 'help' or 'quit'.  To exit choices type 'N'."
     input = gets.chomp
-    if input == 'help'
+    case input
+    when 'help'
       puts 'Instructions for how to play chess can be found at'
       puts 'https://en.wikipedia.org/wiki/Chess.'
       puts "Do you wish to 'save' or 'quit'? To exit choices type 'N'."
-    elsif input == 'save'
+    when 'save'
       save_game(self)
-    elsif input == 'quit'
+    when 'quit'
       board_render.render
-    elsif input == 'N'
+    when 'N'
       return
     else
       puts 'Invalid choice.'
     end
   end
-      
+
   # Actual game play
   def play
     instructions
