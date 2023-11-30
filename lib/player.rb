@@ -8,17 +8,4 @@ class Player
     @name = name
     @color = color
   end
-
-  # Taking player input of eg C3 and converting it into board coordinates
-  def input_position
-    position = gets.chomp.split(//)
-    position.map do |part|
-      part.upcase! if ('a'..'g').cover?(part)
-      part.gsub!(/[A-Z]/) { |m| m.ord - 64 }
-    end
-    numbers = position.map { |num| num.to_i - 1 }
-    numbers[0], numbers[1] = numbers[1], numbers[0]
-    numbers[0] = 7 - numbers[0]
-    numbers
-  end
 end
