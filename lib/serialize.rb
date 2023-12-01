@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 
-require_relative '../lib/game'
 require 'yaml'
 
 # handles everything to do with saving and loading the game
