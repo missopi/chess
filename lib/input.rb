@@ -23,13 +23,13 @@ module Input
     input = gets.chomp
     case input
     when 'save'
-      save_game(self)
+      save_game
     when 'quit'
       puts "\nGoodbye"
-      exit
     else
       puts 'Invalid choice.'
       choose_option
     end
+    exit
   end
 end
