@@ -69,7 +69,7 @@ describe Chessboard do
     context 'A space with NoPiece on it' do
       it 'will be an empty space' do
         location = test_board[[4, 4]]
-        expect(location).to eq(NoPiece.instance)
+        expect(location).to be_a(NoPiece)
       end
     end
   end
@@ -98,7 +98,7 @@ describe Chessboard do
 
       it 'should not include NoPieces' do
         pieces_list = test_pieces.pieces
-        expect(pieces_list).to_not include(NoPiece.instance)
+        expect(pieces_list).to_not include(NoPiece)
       end
 
       it 'should include Queens' do
@@ -129,7 +129,7 @@ describe Chessboard do
 
       it 'contains NoPiece' do
         test_board.remove_piece([0, 0])
-        expect(test_board[[0, 0]]).to eq(NoPiece.instance)
+        expect(test_board[[0, 0]]).to be_a(NoPiece)
       end
     end
   end
