@@ -17,7 +17,7 @@ module Castling
 
   def rook_at_start(from, to)
     rook = rooks(from, to)
-    rook.location[1] == 0 || 7 ? true : false
+    rook.location[1].zero? || rook.location[1] == 7 ? true : false
   end
 
   # find and identify chosen rook to do castling with
@@ -30,11 +30,11 @@ module Castling
   end
 
   def identify_rook(rooks, to)
-    row, column = to
+    _row, column = to
     if column == 6
       rooks.find { |rook| rook if rook.location[1] == 7 }
     elsif column == 2
-      rooks.find { |rook| rook if rook.location[1] == 0 }
+      rooks.find { |rook| rook if rook.location[1].zero? }
     end
   end
 
@@ -48,18 +48,18 @@ module Castling
   def kingside_castling(to, rook)
     row, column = to
     board[row][column - 1] = rook # move rook
-    board[row][column + 1] = NoPiece.instance # delete old rook
+    board[row][column + 1] = NoPiece.new # delete old rook
   end
 
   # king is on farside of rook in comparison to queen
   def queenside_castling(to, rook)
     row, column = to
     board[row][column + 1] = rook
-    board[row][column - 2] = NoPiece.instance 
+    board[row][column - 2] = NoPiece.new
   end
 
   def castling_switch(to, rook)
-    row, column = to
+    _row, column = to
     if column == 6
       kingside_castling(to, rook)
     elsif column == 2
@@ -71,8 +71,7 @@ module Castling
   def opponent_pieces(from)
     king = self[from]
     opponent_color = king.color == :white ? :black : :white
-    opponent_pieces = pieces.select { |piece| piece.color == opponent_color }
-    opponent_pieces
+    pieces.select { |piece| piece.color == opponent_color }
   end
 
   # All valid moves able to be taken by opponent pieces on board
@@ -100,13 +99,13 @@ module Castling
     kingside = piece.color == :white ? :white_kingside : :black_kingside
     direction = from[1] > to[1] ? queenside : kingside
 
-    route_coords = { 
+    route_coords = {
       white_queenside: [[7, 3], [7, 2]],
       white_kingside: [[7, 5], [7, 6]],
       black_queenside: [[0, 3], [0, 2]],
       black_kingside: [[0, 5], [0, 6]]
     }
-    
+
     route << route_coords.fetch(direction) if route_coords.key?(direction)
     route.flatten(1)
   end
