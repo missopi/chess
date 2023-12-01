@@ -31,21 +31,22 @@ module Serialize
     true if answer == 'Y'
   end
 
-  def save_game(current_game)
+  def save_game
     Dir.mkdir('saved_games') unless Dir.exist?('saved_games')
 
     filename = create_filename
-    game = YAML.dump(current_game)
+    game = YAML.dump(self)
     File.open(File.join(Dir.pwd, "/saved_games/#{filename}.yaml"), 'w') { |file| file.write game }
     puts "Game saved in saved_games/#{filename}"
   end
 
   def load_game
-    puts "No saves found.\n" unless saved_games_exist?
+    puts "\nNo saves found.\n" if saved_games_exist? == false
 
-    display_saved_games
     filename = choose_game_to_load
-    YAML.safe_load(File.read("./saved_games/#{filename}.yaml"))
+    saved_file = File.open(File.join(Dir.pwd, "/saved_games/#{filename}.yaml"), 'r')
+    yaml = YAML.safe_load(saved_file, permitted_classes: [Game, Chessboard, RenderBoard, Piece, Pawn, Rook, Bishop, Queen, King, Knight, NoPiece, Player, Symbol], aliases: true)
+    yaml.play
   end
 
   def saved_games
@@ -54,14 +55,9 @@ module Serialize
   end
 
   def saved_games_exist?
-    return false if !Dir.exist?('/saved_games') || Dir.empty?('/save_games')
+    return false if Dir.empty?('saved_games')
 
     true
-  end
-
-  def display_saved_games
-    puts "Saved games:\n\n"
-    saved_games.each { |game| puts game }
   end
 
   def choose_game_to_load
