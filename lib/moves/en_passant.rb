@@ -45,6 +45,6 @@ module EnPassant
   def remove_enpassant_capture(location)
     piece = self[location]
     row, column = location
-    piece.color == :white ? board[row + 1][column] = NoPiece.instance : board[row - 1][column] = NoPiece.instance
+    piece.color == :white ? board[row + 1][column] = NoPiece.new : board[row - 1][column] = NoPiece.new
   end
 end

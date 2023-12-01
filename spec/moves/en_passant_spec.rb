@@ -62,8 +62,8 @@ describe EnPassant do
       end
 
       it 'removes opponent piece from the board' do
-        result = test_board.remove_enpassant_capture([3, 3])
-        expect(test_board[[4, 3]]).to eq(NoPiece.instance)
+        test_board.remove_enpassant_capture([3, 3])
+        expect(test_board[[4, 3]]).to be_a(NoPiece)
       end
     end
   end
