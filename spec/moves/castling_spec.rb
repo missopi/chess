@@ -17,7 +17,7 @@ describe Castling do
     context 'when king is in the starting position' do
       it 'returns true' do
         result = test_board.king_at_start([7, 4])
-        expect(result). to be true
+        expect(result).to be true
       end
     end
   end
@@ -28,7 +28,7 @@ describe Castling do
         test_board.move_king([7, 4], [7, 6])
         expect(test_board[[7, 6]]).to be_a(King)
       end
-    end      
+    end
   end
 
   describe '#rook_at_start' do
@@ -57,7 +57,7 @@ describe Castling do
         rook = Rook.new(test_board, [7, 0], :white)
         to = [7, 2]
         test_board.queenside_castling(to, rook)
-        expect(test_board[[7, 0]]).to eq(NoPiece.instance)
+        expect(test_board[[7, 0]]).to be_a(NoPiece)
       end
     end
   end
@@ -69,4 +69,3 @@ describe Castling do
     end
   end
 end
-
