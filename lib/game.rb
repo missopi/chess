@@ -30,10 +30,23 @@ class Game
     puts "\n"
     puts 'Instructions for how to play chess can be found at'
     puts 'https://en.wikipedia.org/wiki/Chess.'
+    puts "\n"
+  end
+
+  def load
     puts "Do you wish to load a game you've already started? (Y/N)"
     input = gets.chomp.upcase
-    puts "Invalid choice. Do you wish to load a game you've already started? (Y/N)" until %w[Y N].include? input
-    load_game if input == 'Y'
+    loop do
+      break if input == 'N'
+
+      if input == 'Y'
+        game = Game.new(Chessboard.new, RenderBoard)
+        game.load_game.play
+      else
+        puts "Invalid Choice. Do you wish to load a game you've already started? (Y/N)"
+        input = gets.chomp.upcase
+      end
+    end
     puts "\n"
   end
 
