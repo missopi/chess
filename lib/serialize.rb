@@ -64,18 +64,18 @@ module Serialize
   end
 
   def choose_game_to_load
-    puts "Please choose which game you'd like to load or 'exit' menu: "
-    filenames = Dir.glob('saved_games/*')
-    puts filenames
+    puts "\nPlease choose which game you'd like to load or 'exit' menu:\n\n"
 
-    input = gets.chomp.downcase
-    return if input == 'exit'
+    saved_games.each { |game| puts game }
+    puts "\n\n"
 
-    filename = filenames.find { |f| f.match?(/^#{Regexp.quote(input)}/) }.dup
+    filename = gets.downcase.chomp
+    Game.new(Chessboard.start_chess, RenderBoard).play if filename == 'exit'
 
-    until filename
+    until saved_games.include?(filename)
       puts "#{filename} does not exist"
       choose_game_to_load
     end
+    filename
   end
 end
