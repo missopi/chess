@@ -4,7 +4,7 @@ require_relative '../../lib/pieces'
 
 describe NoPiece do
   describe '#to_s' do
-    subject(:no_piece_string) { described_class.instance }
+    subject(:no_piece_string) { described_class.new }
 
     context 'When there is no piece on the board' do
       it 'displays a blank space' do
