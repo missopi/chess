@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'game'
+require_relative '../lib/game'
 
 # everything to do with player input
 module Input
