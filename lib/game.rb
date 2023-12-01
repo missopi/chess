@@ -20,20 +20,16 @@ class Game
     @board_render = render_class.new(board)
     @color = %i[white black]
     @turn = turn
-    instructions
   end
 
-  def instructions
+  def start_game
     puts "\n-------------------- Chess -----------------------\n\n"
     puts 'Instructions for how to play chess can be found at'
     puts "https://en.wikipedia.org/wiki/Chess.\n\n"
     puts "Do you wish to load a game you've already started? (Y/N)\n"
     input = gets.chomp.upcase
     puts "invalid choice. Please input 'Y' or 'N'." unless %w[Y N].include?(input)
-    input == 'Y' ? load_game : start_game
-  end
-
-  def start_game
+    load_game if input == 'Y'
     @player_one = create_player(1)
     @player_two = create_player(2)
     play

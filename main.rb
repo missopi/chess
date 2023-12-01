@@ -8,4 +8,4 @@ require_relative 'lib/player'
 
 cb = Chessboard.start_chess
 
-Game.new(cb, RenderBoard).play
+Game.new(cb, RenderBoard).start_game
