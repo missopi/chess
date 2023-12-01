@@ -29,17 +29,16 @@ module EnPassant
   end
 
   # Check that last move made by opponent ends adjacent to current player's pawn
-  def last_move_adjacent?(from)
+  def last_move_adjacent?
     from = @history.last.first
     last_to = @history[@history.size - 2].last
-    row, column = last_to
     (last_to[1] - from[1]).abs == 1 || (last_to[1] + from[1]).abs == 1
   end
 
   def en_passant_performed?(from)
     return if @history.empty?
 
-    opponent_pawn_adjacent?(from) && last_move_pawn_twostep? && last_move_adjacent?(from)
+    opponent_pawn_adjacent?(from) && last_move_pawn_twostep? && last_move_adjacent?
   end
 
   def remove_enpassant_capture(location)
