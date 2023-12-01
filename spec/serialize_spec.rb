@@ -25,12 +25,12 @@ describe Serialize do
   describe '#save_game' do
     it 'sends message to create a directory' do
       expect(Dir).to receive(:mkdir).once
-      test_game.save_game(test_game)
+      test_game.save_game
     end
 
     it 'sends message to create a file' do
       expect(File).to receive(:open).once
-      test_game.save_game(test_game)
+      test_game.save_game
     end
   end
 
