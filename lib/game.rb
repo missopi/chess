@@ -9,10 +9,9 @@ require_relative '../lib/input'
 
 # class for the chess gameplay
 class Game
+  include Colored
   include Serialize
   include Input
-
-  OPTIONS = %w[help save quit].freeze
 
   attr_reader :board, :color, :board_render
   attr_accessor :name
@@ -27,7 +26,9 @@ class Game
 
   def instructions
     puts '\n-------------------- Chess -----------------------\n'
-    puts 'Instructions for how to play chess can be found at https://en.wikipedia.org/wiki/Chess.\n'
+    puts 'Instructions for how to play chess can be found at'
+    puts 'https://en.wikipedia.org/wiki/Chess.\n'
+    puts "Do you wish to load a game you've already started? (Y/N)"
     input = gets.chomp.upcase
     puts "invalid choice. Please input 'Y' or 'N'." unless %w[Y N].include?(input)
     if input == 'Y'
@@ -67,7 +68,7 @@ class Game
   # Each player's turn
   def player_turn(player)
     puts "\nIt's #{player.name}'s turn"
-    puts "#{player.color} is currently in check." if board.check?(player.color)
+    puts "#{player.color} you are currently in check." if board.check?(player.color)
     loop do
       board_render.render
       from_pos = player_input_from(player)
@@ -102,7 +103,7 @@ class Game
 
   def game_over?(current_player, other_player)
     if board.checkmate?(current_player.color)
-      puts "Game Over. #{other_player.name} wins!"
+      puts "Checkmate. #{other_player.name} wins!"
       exit
     end
 
