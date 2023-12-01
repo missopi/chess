@@ -34,21 +34,10 @@ describe Serialize do
     end
   end
 
-  describe '#saved_games' do
-    xit 'returns saved games' do
-
-    end
-  end
-
   describe '#saved_games_exist?' do
     it 'returns false if game is not in folder' do
       game = test_game.file_exists?('sophie')
       expect(game).to be false
-    end
-  end
-
-  describe '#display_saved_games' do
-    xit 'puts list of saved games' do
     end
   end
 end
