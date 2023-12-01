@@ -9,7 +9,6 @@ require_relative '../lib/input'
 
 # class for the chess gameplay
 class Game
-  include Colored
   include Serialize
   include Input
 
