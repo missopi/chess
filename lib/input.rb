@@ -9,7 +9,7 @@ module Input
     position.map do |part|
       part.upcase! if ('a'..'o').cover?(part)
       choose_option if part == 'O'
-      part.gsub!(/[A-G]/) { |m| m.ord - 64 }
+      part.gsub!(/[A-H]/) { |m| m.ord - 64 }
     end
     numbers = position.map { |num| num.to_i - 1 }
     numbers[0], numbers[1] = numbers[1], numbers[0]
