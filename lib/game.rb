@@ -22,32 +22,21 @@ class Game
     @board_render = render_class.new(board)
     @color = %i[white black]
     @turn = turn
+    instructions
   end
 
   def instructions
-    puts "\n"
-    puts '-------------------- Chess -----------------------'
-    puts "\n"
-    puts 'Instructions for how to play chess can be found at'
-    puts 'https://en.wikipedia.org/wiki/Chess.'
-    puts "\n"
-  end
-
-  def load
-    puts "Do you wish to load a game you've already started? (Y/N)"
+    puts '\n-------------------- Chess -----------------------\n'
+    puts 'Instructions for how to play chess can be found at https://en.wikipedia.org/wiki/Chess.\n'
     input = gets.chomp.upcase
-    loop do
-      break if input == 'N'
-
-      if input == 'Y'
-        game = Game.new(Chessboard.new, RenderBoard)
-        game.load_game.play
-      else
-        puts "Invalid Choice. Do you wish to load a game you've already started? (Y/N)"
-        input = gets.chomp.upcase
-      end
+    puts "invalid choice. Please input 'Y' or 'N'." unless %w[Y N].include?(input)
+    if input == 'Y'
+      load_game
+    else
+      @player_one = create_player(1)
+      @player_two = create_player(2)
+      play
     end
-    puts "\n"
   end
 
   # Get players name and assign color
@@ -65,15 +54,12 @@ class Game
 
   # Actual game play
   def play
-    instructions
-    @player_one = create_player(1)
-    @player_two = create_player(2)
     loop do
-      @current_player = assign_current_player(@turn)
+      current_player = assign_current_player(@turn)
       other_player = assign_current_player(@turn - 1)
-      break if game_over?(@current_player, other_player)
+      break if game_over?(current_player, other_player)
 
-      player_turn(@current_player)
+      player_turn(current_player)
       @turn += 1
     end
   end
