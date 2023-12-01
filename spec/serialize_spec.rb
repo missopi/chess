@@ -6,28 +6,23 @@ describe Serialize do
   subject(:test_game) { Game.new(test_board, RenderBoard) }
   subject(:test_board) { Chessboard.start_chess }
 
+  before do
+    allow(Dir).to receive(:mkdir)
+    allow(test_game).to receive(:puts)
+    allow(test_game).to receive(:gets).and_return('test')
+    allow(File).to receive(:open)
+  end
+
   describe '#create_filename' do
     context "If a file doesn't already exist with the same name" do
-      before do
-        allow(test_game).to receive(:puts)
-        allow(test_game).to receive(:gets).and_return('sophie')
-      end
-
       it 'returns the filename' do
         game = test_game.create_filename
-        expect(game).to eq('sophie')
+        expect(game).to eq('test')
       end
     end
   end
 
   describe '#save_game' do
-    before do
-      allow(Dir).to receive(:mkdir)
-      allow(test_game).to receive(:puts)
-      allow(test_game).to receive(:gets).and_return('test')
-      allow(File).to receive(:open)
-    end
-
     it 'sends message to create a directory' do
       expect(Dir).to receive(:mkdir).once
       test_game.save_game(test_game)
@@ -41,11 +36,14 @@ describe Serialize do
 
   describe '#saved_games' do
     xit 'returns saved games' do
+
     end
   end
 
   describe '#saved_games_exist?' do
-    xit 'returns true if any saves are in folder' do
+    it 'returns false if game is not in folder' do
+      game = test_game.file_exists?('sophie')
+      expect(game).to be false
     end
   end
 
