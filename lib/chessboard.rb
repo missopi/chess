@@ -32,7 +32,7 @@ class Chessboard
   end
 
   def initialize
-    @board = Array.new(8) { Array.new(8, NoPiece.instance) }
+    @board = Array.new(8) { Array.new(8, NoPiece.new) }
     @history = []
   end
 
@@ -51,7 +51,7 @@ class Chessboard
   # method to show if space at location chosen is an empty space
   def empty_space?(location)
     row, column = location
-    board[row][column] == NoPiece.instance
+    board[row][column].is_a?(NoPiece)
   end
 
   # method to show if location chosen is on the board
@@ -66,7 +66,7 @@ class Chessboard
 
   # method to select only the pieces on the board and reject the empty spaces
   def pieces
-    board.flatten.reject { |piece| piece == NoPiece.instance }
+    board.flatten.reject { |piece| piece.is_a?(NoPiece) }
   end
   
   # method to isolate king's location
@@ -112,7 +112,7 @@ class Chessboard
   end
 
   def remove_piece(from)
-    self[from] = NoPiece.instance
+    self[from] = NoPiece.new
   end
 
   def update_game_record(from, to)

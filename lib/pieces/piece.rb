@@ -12,7 +12,7 @@ class Piece
   end
 
   def opponent?(location)
-    board[location]&.color != color && board[location] != NoPiece.instance
+    board[location]&.color != color && board[location].is_a?(Piece)
   end
 
   def opponent_pawn?(location)

@@ -1,10 +1,7 @@
 # frozen_string_literal: true
 
-require 'singleton'
-
+# all instances of no piece on the board
 class NoPiece
-  include Singleton
-
   def to_s
     print '   '
   end
