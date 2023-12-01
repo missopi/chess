@@ -25,19 +25,19 @@ class Game
   end
 
   def instructions
-    puts '\n-------------------- Chess -----------------------\n'
+    puts "\n-------------------- Chess -----------------------\n\n"
     puts 'Instructions for how to play chess can be found at'
-    puts 'https://en.wikipedia.org/wiki/Chess.\n'
-    puts "Do you wish to load a game you've already started? (Y/N)"
+    puts "https://en.wikipedia.org/wiki/Chess.\n\n"
+    puts "Do you wish to load a game you've already started? (Y/N)\n"
     input = gets.chomp.upcase
     puts "invalid choice. Please input 'Y' or 'N'." unless %w[Y N].include?(input)
-    if input == 'Y'
-      load_game
-    else
-      @player_one = create_player(1)
-      @player_two = create_player(2)
-      play
-    end
+    input == 'Y' ? load_game : start_game
+  end
+
+  def start_game
+    @player_one = create_player(1)
+    @player_two = create_player(2)
+    play
   end
 
   # Get players name and assign color
