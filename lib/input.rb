@@ -19,17 +19,14 @@ module Input
 
   # Additional option choices
   def choose_option
-    puts "Choose either 'save' or 'quit'.  To exit choices type 'N'."
+    puts "Do you want to 'save' or 'quit'."
     input = gets.chomp
     case input
     when 'save'
       save_game(self)
-      player_input_from(@current_player)
     when 'quit'
       puts "\nGoodbye"
       exit
-    when 'N'
-      player_input_from(@current_player)
     else
       puts 'Invalid choice.'
       choose_option
